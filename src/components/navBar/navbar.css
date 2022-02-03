@@ -1,0 +1,55 @@
+.navbar{
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid #E2E5E6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10%;
+}
+.navbar__title{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    color: #22577E;
+}
+
+.navbar__right{
+    display: flex;
+    align-items: center;
+}
+
+.navbar__lang{
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 8px 15px;
+    border-radius: 18px;
+    cursor: pointer;
+    font-family: "SegoeBold";
+    background:none;
+    border: none;
+}
+.navbar__lang:hover{
+    box-shadow:  1px 1px 11px 0px rgba(87, 86, 86, 0.75);
+}
+.navbar__lang.active{
+    background-color: #FC997C;
+    color: #ffff;
+}
+.navbar__lang.active:hover{ 
+    box-shadow:  1px 1px 11px 0px rgba(255, 163, 102, 0.75);
+}
+.navbar__menu{
+    cursor: pointer;
+    margin: 0 34px;
+}
+.btn-icon{
+    margin-right: 10px;
+}
+
+.navbar .btn a{
+    color:#22577E;
+
+}
