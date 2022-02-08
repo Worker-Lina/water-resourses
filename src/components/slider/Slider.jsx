@@ -5,27 +5,15 @@ import "./slider.css"
 const Slider = ({images}) => {
     const [current, setCurrent] = useState(0)
     if(!Array.isArray(images) || images.length<=0){
-        return "-"
+        return null
     }
-    //получаю длину пришедшего массива
-    const getLegth = ()=>{
-        let length = 0
-        images.map(image=>{
-            if(image && image != ""){
-                length+=1;
-            }
-        })
-        return length
-    }
-    const length = getLegth()
-
+    const length = images.length
     const nextSlide = ()=>{
         setCurrent(current === length-1 ? 0 : current+1)
     }
     const prevSlide = ()=>{
         setCurrent(current === 0 ? length -1 : current-1)
     }
-    // проверяю является ли ссылку из ютуба
     const checkurl= (url) => {
         return url.replace("http://","").replace("https://","").replace("www.","").replace("youtu.be/","youtube.com?v=").slice(0,14)==="youtube.com?v=" || 
         url.replace("http://","").replace("https://","").replace("www.","").replace("youtu.be/","youtube.com?v=").slice(0,14)==="youtube.com/wa";
@@ -36,15 +24,10 @@ const Slider = ({images}) => {
                 {images.map((image, index) => 
                     <div className={index===current ? 'slide active' : 'slide'} key = {index}>
                         {index ===current && (
-                            image.url && image !==null && image.url !==" " ? 
-                                <img src={"https://turkestan.panama.kz/" + image.url} alt="travel" className="slider-img" onError={({ currentTarget }) => {
-                                    currentTarget.onerror = null; 
-                                    currentTarget.src="https://kip.pt/wp-content/uploads/2019/11/camera.jpg";
-                                    }}/>
+                            checkurl(image) ? 
+                                <Player url={image}></Player>
                                 :
-                                checkurl(image) ?                                         
-                                    <Player url={image}></Player>
-                                    :<></>
+                                <img src={image} alt="travel" className="slider-img"/>
                             )}
                     </div>) 
                 }

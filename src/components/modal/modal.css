@@ -8,16 +8,6 @@
     top: 30px;
     right: 30px;
     display: none;
-    max-height: 90%;
-}
-
-.modal::-webkit-scrollbar{
-    width: 6px;
-}
-
-.modal::-webkit-scrollbar-thumb {
-    background-color: #EEEEEE;
-    border-radius: 8px;
 }
 .modal.active{
     display: block;
@@ -33,26 +23,19 @@
     line-height: 20px;  
     color: #969BAB;
 }
-.modal__title{
-    font-family: "Segoe UI";
-    font-size: 28px;
-    line-height: 40px;
-    font-weight: bold;
-}
 .text__title{
     font-weight: 600;
     font-size: 18px;
     line-height: 28px;
     color: #18191F;
-    font-family: "Segoe UI"
+    font-family: "SegoeBold"
 }
 
 .text__description{
-    font-size: 16px;
-    line-height: 26px;
+    font-size: 14px;
+    line-height: 24px;
     color:  #474A57;
     margin-bottom: 15px;
-    font-family: "Segoe UI"
 }
 .line{
     height: 1px;
@@ -91,4 +74,3 @@
 .modal .btn a{
     color:#ffff
 }
-
