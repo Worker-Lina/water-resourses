@@ -1,0 +1,10 @@
+{
+    "title": "Water resources of Turkestan",
+    "button":"Download report",
+    "navbar":{
+      "button": "LogIn"
+    },
+    "ItemPage":{
+      "main":"Home"
+    }
+  }
