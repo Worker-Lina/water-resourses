@@ -1,0 +1,5 @@
+export const LOGIN_ROUTE = '/login'
+export const REGISTRATION_ROUTE = '/registration'
+export const MAINPAGE_ROUTE = '/'
+export const OBJECT_ROUTE = '/objects'
+export const REPORT_ROUTE = '/report'
