@@ -29,7 +29,7 @@ const NavBar = () => {
                 <div className="navbar__menu-div" onClick={()=>{setActive(!active)}}>
                   <div className="navbar__menu"></div>
                 </div>
-                <Link to="/" className="navbar__title"> {t("title")} </Link>      
+                <Link to="/" className="navbar__title" onClick={()=>setActive(false)}> {t("title")} </Link>      
             </div>
             <div className="navbar__right"> 
                 <button className={kzButton ? "navbar__lang active" : "navbar__lang"} onClick={() => {changeLanguage("kk"); setKzButton(true); setRuButton(false);setEnButton(false);}}>ҚАЗ</button>
