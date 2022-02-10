@@ -6,7 +6,6 @@ import { fetchOneObject } from '../../http/reservoirApp';
 import { useState } from 'react/cjs/react.development';
 import { Link } from 'react-router-dom';
 import i18n from '../../i18n';
-import Spoiler from '../spoiler/Spoiler';
 
 const Modal = ({id, active, setActive, mapRef, center, zoom}) => {
   const [item, setItem] = useState(null)
@@ -16,7 +15,7 @@ const Modal = ({id, active, setActive, mapRef, center, zoom}) => {
 
   useEffect(() => {
     fetchOneObject(id).then(data => {setItem(data.content); setLoading(true)})
-  }, [i18n.language])
+  }, [i18n.language, id])
 
   const getCorrectSlides = ()=>{
     {item.photos && item.video ? 
@@ -27,6 +26,10 @@ const Modal = ({id, active, setActive, mapRef, center, zoom}) => {
         slides = item.video :
       slides = null
     }
+    slides = slides.filter((el) =>{
+      return (el != null && el != "")
+    })
+    console.log(slides)
     return slides
   }
 
@@ -35,12 +38,12 @@ const Modal = ({id, active, setActive, mapRef, center, zoom}) => {
       <div className={active ? "modal active" : "modal"}>
         <div className="modal__top">
             <p>{item.type.name}</p>
-            <div className="close__button" onClick={()=>{setActive(false); if(active){
+            <div className="close__button" onClick={()=>{setActive(false); 
                 const map = mapRef.current
                 map.flyTo(center, zoom, {
                   duration: 1
                 })
-              }}}>
+              }}>
                 <div className="menu__close"></div>
             </div>
         </div>
@@ -53,12 +56,12 @@ const Modal = ({id, active, setActive, mapRef, center, zoom}) => {
         <p> - </p> :
         <p className="text__description"> {item.volume}</p>}
 
-        <p className="text__title"> Задачи объекта</p>
+        <p className="text__title"> Задача объекта</p>
         {item.goal === ""  || item.goal == null ? 
         <p> - </p> :
         <p className="text__description" dangerouslySetInnerHTML={{ __html: item.goal }} />}
         
-        <p className="text__title">Ожидаем результат</p>
+        <p className="text__title">Ожидаемый результат</p>
         {item.expectation === ""  || item.expectation == null ? 
         <p> - </p> :
         <p className="text__description" dangerouslySetInnerHTML={{ __html: item.expectation }} />}
