@@ -1,0 +1,29 @@
+.footer{
+    display: flex;
+    justify-content: space-between;
+    background-color: #22577E;
+    padding: 20px 10%;
+    font-size: 16px;
+    line-height: 26px;
+    color: #ffff;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.footer-hidden{
+    position: absolute;
+    bottom: inherit;
+    top: -2000px;
+    visibility: hidden;
+}
+.footer__left{
+    display: flex;
+}
+.footer__left p{
+    margin-right: 22px;
+    display: flex;
+    align-items: center;
+}
+.footer-svg{
+    margin-right: 12px;
+}

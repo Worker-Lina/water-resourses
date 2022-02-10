@@ -1,0 +1,39 @@
+@font-face {
+  font-family: "Segoe";
+  src: local("Segoe"),
+   url("./fonts/Segoe.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Segoe";
+  src: local("Segoe"),
+   url("./fonts/SegoeBold.ttf") format("truetype");
+  font-weight: bold;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe";
+}
+a{
+  text-decoration: none;
+}
+body{
+  overflow-x: hidden;
+}
+.leaflet-bottom{
+  display: none;
+}
+::-webkit-scrollbar {
+  width: 6px; /* ширина для вертикального скролла */
+}
+/* ползунок скроллбара */
+::-webkit-scrollbar-thumb {
+  background-color: #EEEEEE;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #606061;
+}
+
