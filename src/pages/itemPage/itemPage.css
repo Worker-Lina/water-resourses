@@ -1,6 +1,9 @@
 .item__page{
     padding: 50px 10%;
 }
+.item__page .slider__nav{
+    z-index: 0;
+}
 .page-transition{
     display: flex;
     list-style: none;
