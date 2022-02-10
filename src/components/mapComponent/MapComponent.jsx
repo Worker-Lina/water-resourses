@@ -11,7 +11,6 @@ import vector from "../../imgs/Vector.svg"
 import orange from "../../imgs/orange.svg"
 import green from "../../imgs/green.svg"
 import { Icon } from 'leaflet';
-import { FullscreenControl } from "react-leaflet-fullscreen";
 
 const MapComponent = ({textVisible, setTextVisible}) => {
   const [active, setActive]=useState(false)
