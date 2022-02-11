@@ -62,9 +62,9 @@
             height: 30vh;
         }
 }
-@media (max-width: 1500px) and (max-height: 768px) {
+@media (max-width: 1600px) and (max-height: 726px) {
         .slider-img, .player-video{
-            height: 60vh;
+            height: 80vh;
         }
 }
 

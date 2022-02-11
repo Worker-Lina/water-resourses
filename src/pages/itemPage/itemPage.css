@@ -14,7 +14,6 @@
     font-size: 14px;
     line-height: 24px;
     color: #18191F;
-    font-family: "Segoe UI";
 }
 .vertical-line{
     width: 1px;
@@ -29,7 +28,6 @@
 }
 
 .item__page-text{
-    font-family: "Segoe";
     font-weight: 600;
     font-size: 16px;
     line-height: 26px;
