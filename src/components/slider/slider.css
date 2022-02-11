@@ -109,6 +109,9 @@
         margin: 0 5px;
         font-size: 14px
     }
+    .modal-slide__active{
+        width: 100%;
+    }
 }
 
 @media (max-width:440px){
@@ -131,8 +134,5 @@
     .slider .icon{
         width: 15px;
         height: 15px;
-    }
-    .modal-slide__active{
-        width: 100%;
     }
 }
