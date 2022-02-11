@@ -61,13 +61,9 @@
     opacity: 0;
     transition-duration: 1s ease;
     position: absolute; 
-}
-.modal-slide-right{
     transform: translateX(3000px);
 }
-.modal-slide-left{
-    transform: translateX(-3000px);
-}
+
 
 .modal-slide__active{
     width: 70%;

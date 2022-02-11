@@ -38,7 +38,6 @@ const ItemPage = () => {
     slides = slides.filter((el) =>{
       return (el != null && el != "")
     })
-    console.log(slides)
     return slides
   }
 

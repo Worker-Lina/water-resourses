@@ -31,6 +31,27 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'Segoe UI';
+	src: url('./fonts/SegoeUI-BoldItalic.eot');
+	src: local('Segoe UI Bold Italic'), local('SegoeUI-BoldItalic'),
+		url('./fonts/SegoeUI-BoldItalic.eot?#iefix') format('embedded-opentype'),
+		url('./fonts/SegoeUI-BoldItalic.woff') format('woff'),
+		url('./fonts/SegoeUI-BoldItalic.ttf') format('truetype');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Segoe UI';
+	src: url('./fonts/SegoeUI-Italic.eot');
+	src: local('Segoe UI Italic'), local('SegoeUI-Italic'),
+		url('./fonts/SegoeUI-Italic.eot?#iefix') format('embedded-opentype'),
+		url('./fonts/SegoeUI-Italic.woff') format('woff'),
+		url('./fonts/SegoeUI-Italic.ttf') format('truetype');
+	font-weight: normal;
+	font-style: italic;
+}
 *{
   margin: 0;
   padding: 0;
