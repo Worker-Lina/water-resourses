@@ -21,12 +21,13 @@ const MapComponent = ({textVisible, setTextVisible}) => {
   const maxBounds = [[41.51686545959234,64.83128339062499],[44.75806942902366,74.2081144453125]]
   const mapRef = useRef()
   const [markers, setMarkers]=useState()
+  const [width] = useState(window.screen.width)
 
   useEffect(()=>{
-    if(window.screen.width < 640){
+    if(window.screen.width < 640 && zoom !== 7){
       setZoom(7)
     }
-  }, [])
+  }, [width])
 
   var LeafIcon = Icon.extend({
       options: {
