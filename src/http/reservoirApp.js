@@ -1,5 +1,5 @@
 import axios from "axios";
-import i18n from "../i18n";
+import i18n from 'i18next'
 
 //запрос на вытягивание всех водохранилищ
 export const fetchReservoirs = async () => {

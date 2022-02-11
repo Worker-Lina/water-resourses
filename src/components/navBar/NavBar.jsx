@@ -34,7 +34,7 @@ const NavBar = () => {
     }
     
   return (<>
-        <div className="navbar">
+        <div id="topNav" className="navbar">
           <div className="navbar__right">
                 <div className="navbar__menu-div" onClick={()=>{setActive(!active)}}>
                   <div className="navbar__menu"></div>

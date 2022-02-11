@@ -18,7 +18,7 @@ const MapComponent = ({textVisible, setTextVisible}) => {
   const [idItem, setIdItem] = useState(41)
   const [zoom, setZoom] = useState(9)
   const [loading, setLoading] = useState(false)
-  const maxBounds = [[40.44286695862814,59.49742108593749],[46.86282000379146,78.25108319531248]]
+  const maxBounds = [[41.51686545959234,64.83128339062499],[44.75806942902366,74.2081144453125]]
   const mapRef = useRef()
   const [markers, setMarkers]=useState()
 
@@ -49,7 +49,7 @@ const MapComponent = ({textVisible, setTextVisible}) => {
   //функция для приближения карты к выделенному объекту
   function handleOnFlyTo(position) {
     const map  = mapRef.current;
-    map.flyTo(position, 10, {
+    map.flyTo([position.lat, position.lng + 0.4], 10, {
       duration: 1
     });
   }

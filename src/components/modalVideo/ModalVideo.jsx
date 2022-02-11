@@ -22,6 +22,7 @@ const ModalVideo = ({active, setActive, slides, current}) => {
   }
   if(active){
     document.getElementById('nav').classList.add("navbar__none")
+    document.getElementById('topNav').classList.add("navbar__none")
   }
   return (
   <div className="modal-video"  onClick={(e)=>{setActive(false); e.stopPropagation(); document.getElementById('nav').classList.remove("navbar__none")}}>
