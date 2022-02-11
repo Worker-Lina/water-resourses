@@ -66,7 +66,7 @@ const MapComponent = ({textVisible, setTextVisible}) => {
 
   const mapToFullScreen = ()=>{
     setTextVisible(!textVisible)
-    let height = window.screen.height < 640 ? window.screen.height - 50 : window.screen.height - 80
+    let height = window.screen.width < 640 ? window.screen.height - 50 : window.screen.height - 80
     if(textVisible){
       document.getElementsByClassName('myMap')[0].style.height = height + "px";
       document.getElementById('footer').classList.add('footer-hidden');
