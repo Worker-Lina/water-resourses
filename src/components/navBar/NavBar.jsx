@@ -16,10 +16,9 @@ const NavBar = () => {
 
 
     useEffect(()=>{
-      let item = localStorage.getItem('lang');
-      item === "ru" ? setRuButton(true) :
-      item === "kk" ? setKzButton(true) :
-      item === "en" ? setEnButton(true) :
+      i18n.language === "ru" ? setRuButton(true)
+      : i18n.language === "en" ? setEnButton(true)
+      : i18n.language === "kk" ? setKzButton(true) :
       setRuButton(true)
     }, [])
 
@@ -42,9 +41,9 @@ const NavBar = () => {
                 <Link to="/" className="navbar__title" onClick={()=>setActive(false)}> {t("title")} </Link>      
             </div>
             <div className="navbar__right"> 
-                <button className={kzButton ? "navbar__lang active" : "navbar__lang"} onClick={() => {changeLanguage("kk"); localStorage.setItem('lang', "kk"); setKzButton(true); setRuButton(false);setEnButton(false);}}>ҚАЗ</button>
-                <button className={ruButton ? "navbar__lang active" : "navbar__lang"} onClick={() => {changeLanguage("ru"); localStorage.setItem('lang', "ru");  setKzButton(false); setRuButton(true);setEnButton(false)}}>РУС</button>
-                <button className={enButton ? "navbar__lang active" : "navbar__lang"} onClick={() => {changeLanguage("en"); localStorage.setItem('lang', "en"); setKzButton(false); setRuButton(false);setEnButton(true)}}>ENG</button>
+                <button className={kzButton ? "navbar__lang active" : "navbar__lang"} onClick={() => {changeLanguage("kk"); setKzButton(true); setRuButton(false);setEnButton(false);}}>ҚАЗ</button>
+                <button className={ruButton ? "navbar__lang active" : "navbar__lang"} onClick={() => {changeLanguage("ru"); setKzButton(false); setRuButton(true);setEnButton(false)}}>РУС</button>
+                <button className={enButton ? "navbar__lang active" : "navbar__lang"} onClick={() => {changeLanguage("en"); setKzButton(false); setRuButton(false);setEnButton(true)}}>ENG</button>
                 <Link to="/login">
                 <MyButton variant="border">
                   <svg className="btn-icon" width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">

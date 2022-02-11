@@ -22,10 +22,10 @@ const ModalVideo = ({active, setActive, slides, current}) => {
   }
   if(active){
     document.getElementById('nav').classList.add("navbar__none")
-    document.getElementById('topNav').classList.add("navbar__none")
+    document.getElementById('topNav').style.zIndex = "1";
   }
   return (
-  <div className="modal-video"  onClick={(e)=>{setActive(false); e.stopPropagation(); document.getElementById('nav').classList.remove("navbar__none"); document.getElementById('topNav').classList.remove("navbar__none")}}>
+  <div className="modal-video"  onClick={(e)=>{setActive(false); e.stopPropagation(); document.getElementById('nav').classList.remove("navbar__none");}}>
     <div className="modal__nav-control">{currentInModal+1}/{length}</div>
       <div className="slider__control" onClick={(e)=>{e.stopPropagation();prevSlide(); }}></div>
         {slides.map((slide, index) => 
