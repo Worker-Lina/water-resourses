@@ -24,7 +24,7 @@ const MapComponent = ({textVisible, setTextVisible}) => {
   const [width] = useState(window.screen.width)
 
   useEffect(()=>{
-    if(window.screen.width < 640 && zoom !== 7){
+    if(window.screen.width <= 640 && zoom !== 7){
       setZoom(7)
     }
   }, [width])
