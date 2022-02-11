@@ -79,7 +79,7 @@ const MapComponent = ({textVisible, setTextVisible}) => {
   return(<div className="map__container">
      <MapContainer whenCreated={ mapInstance => { mapRef.current = mapInstance; addPolylinesToMap() } } className="myMap" center={center} zoom={zoom} scrollWheelZoom={false} zoomControl={false} doubleClickZoom={false} maxBounds={maxBounds}>
       <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=Orq9UsgNWFD0JZUL2f7X" minZoom={8}
+        url="https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=Orq9UsgNWFD0JZUL2f7X" minZoom={8}
       />
       {loading ?
       markers.map(marker => 
