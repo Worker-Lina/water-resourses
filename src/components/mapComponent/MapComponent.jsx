@@ -49,7 +49,7 @@ const MapComponent = ({textVisible, setTextVisible}) => {
   //функция для приближения карты к выделенному объекту
   function handleOnFlyTo(position) {
     const map  = mapRef.current;
-    map.flyTo([position.lat, position.lng + 0.4], 10, {
+    map.flyTo([position.lat, position.lng + 0.2], 10, {
       duration: 1
     });
   }
