@@ -67,8 +67,11 @@
             height: 80vh;
         }
 }
-
-
+@media (max-width: 1367px) and (max-height: 768px) {
+        .slider-img, .player-video{
+            height: 60vh;
+        }
+}
 
 @media(max-width: 1024px){
     .slider-img, .player-video{
@@ -128,5 +131,8 @@
     .slider .icon{
         width: 15px;
         height: 15px;
+    }
+    .modal-slide__active{
+        width: 100%;
     }
 }
