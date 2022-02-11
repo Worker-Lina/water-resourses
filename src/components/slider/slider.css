@@ -52,8 +52,28 @@
         height: 55vh;
     }
 }
+@media (max-width: 1600px) and (max-height: 1200px) {
+        .slider-img, .player-video{
+            height: 50vh;
+        }
+}
+@media (max-width: 1025px) and (max-height: 1367px) {
+        .slider-img, .player-video{
+            height: 30vh;
+        }
+}
+@media (max-width: 1500px) and (max-height: 768px) {
+        .slider-img, .player-video{
+            height: 60vh;
+        }
+}
+
+
 
 @media(max-width: 1024px){
+    .slider-img, .player-video{
+        height: 55vh;
+    }
     .player-video{
         width: 100%;
     }
