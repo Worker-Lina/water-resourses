@@ -66,7 +66,7 @@
 }
 .full-screen{
     width: fit-content;
-    padding: 6px;
+    padding: 6px 6px 2px 6px;
     position: relative;
     background-color: white;
     border: none;
@@ -85,7 +85,7 @@
 }
 @media(max-width:640px){
     .full-screen{
-        padding: 3px;
+        padding: 3px 3px 0 3px;
     }
     .full-screen-svg{
         width: 16px;
