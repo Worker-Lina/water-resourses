@@ -1,0 +1,100 @@
+.map__container{
+    position: relative;
+}
+.myMap{
+    width: 100%;
+    height: 100vh;
+}
+.myMap-full{
+    height: 100vh !important;
+}
+.myMap__content{
+    width: 200px;
+    background-color: brown;
+    height: 300px;
+    display: none;
+}
+.active{
+    display: flex;
+}
+.leaflet-pane {
+    z-index: 0;
+}
+.myPolyline{
+    stroke: #ffff;
+    fill: none;
+    stroke-dasharray: 5,5; 
+    stroke-width: 3;  
+}
+
+.leaflet-control-zoom-in{
+    margin-bottom: 10px;
+}
+.leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar{
+    border: none;
+}
+.leaflet-touch .leaflet-bar a{
+    color: #0078A8;
+    border-radius: 4px !important;
+}
+.leaflet-touch .leaflet-bar a{
+    width: 32px;
+    height: 32px;
+}
+.myDivIcon{
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 32px;
+    color: #ffff;
+    text-transform: uppercase;
+    text-shadow: 0px 0px 10px #000000;
+}
+.myDivIcon__blue{
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 21px;
+    color: #9DEAFF;
+    text-shadow: 0px 0px 10px #000000;
+}
+.myDivIcon__white{
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    color: #FFFFFF;
+    text-shadow: 0px 0px 10px #000000;
+    width: fit-content !important;
+}
+.full-screen{
+    width: fit-content;
+    padding: 6px;
+    position: relative;
+    background-color: white;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    cursor: pointer;
+    top: 10px;
+    left: 10px;
+}
+.full-screen:hover{
+    box-shadow:  1px 1px 11px 0px rgba(175, 176, 180, 0.75);
+}
+
+.full-screen-svg{
+    width: 24px;
+}
+@media(max-width:640px){
+    .full-screen{
+        padding: 3px;
+    }
+    .full-screen-svg{
+        width: 16px;
+    }
+    .leaflet-marker-icon{
+        width: 24px !important;
+        height: 70px !important;
+    }
+    .myMap{
+        height: 70vh;
+    }
+}

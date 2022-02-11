@@ -1,0 +1,69 @@
+.item__page{
+    padding: 130px 10% 50px;
+}
+.item__page .slider__nav{
+    z-index: 0;
+}
+.page-transition{
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+.page-transition a{
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 24px;
+    color: #18191F;
+    font-family: "Segoe UI";
+}
+.vertical-line{
+    width: 1px;
+    height: 20px;
+    background-color: #969BAB;
+    margin: 0 8px;
+    transform: rotate(15deg);
+}
+
+.page-transition a.active{
+    color: #969BAB;
+}
+
+.item__page-text{
+    font-family: "Segoe";
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 26px;
+    color: #969BAB;
+    margin-top: 30px;
+}
+
+.item__page .btn{
+    float: right;
+}
+
+@media(max-width: 640px){
+    .item__page-text{
+        font-size: 10px;
+        margin-top: 10px;
+    }
+    .item__page .btn{
+        line-height: normal;
+        font-size: 10px;
+        padding: 6px 12px;
+    }
+    .item__page{
+        padding: 90px 6% 50px;
+    }
+    .page-transition a{
+        font-size: 10px;
+    }
+    .vertical-line{
+        height: 10px;
+    }
+}
+
+@media(max-width: 440px){
+    .item__page{
+        padding: 70px 3% 50px;
+    }
+}
