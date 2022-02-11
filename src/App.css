@@ -1,15 +1,36 @@
 @font-face {
-  font-family: "Segoe";
-  src: local("Segoe"),
-   url("./fonts/Segoe.ttf") format("truetype");
-  font-weight: normal;
+	font-family: 'Segoe UI';
+	src: url('./fonts/SegoeUI-SemiBold.eot');
+	src: local('Segoe UI Semibold'), local('SegoeUI-SemiBold'),
+		url('./fonts/SegoeUI-SemiBold.eot?#iefix') format('embedded-opentype'),
+		url('./fonts/SegoeUI-SemiBold.woff') format('woff'),
+		url('./fonts/SegoeUI-SemiBold.ttf') format('truetype');
+	font-weight: 600;
+	font-style: normal;
 }
+
 @font-face {
-  font-family: "Segoe";
-  src: local("Segoe"),
-   url("./fonts/SegoeBold.ttf") format("truetype");
-  font-weight: bold;
+	font-family: 'Segoe UI';
+	src: url('./fonts/SegoeUI.eot');
+	src: local('Segoe UI'), local('SegoeUI'),
+		url('./fonts/SegoeUI.eot?#iefix') format('embedded-opentype'),
+		url('./fonts/SegoeUI.woff') format('woff'),
+		url('./fonts/SegoeUI.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
 }
+
+@font-face {
+	font-family: 'Segoe UI';
+	src: url('./fonts/SegoeUI-Bold.eot');
+	src: local('Segoe UI Bold'), local('SegoeUI-Bold'),
+		url('./fonts/SegoeUI-Bold.eot?#iefix') format('embedded-opentype'),
+		url('./fonts/SegoeUI-Bold.woff') format('woff'),
+		url('./fonts/SegoeUI-Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
 *{
   margin: 0;
   padding: 0;

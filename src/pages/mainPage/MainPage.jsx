@@ -1,7 +1,6 @@
 import React from 'react';
 import MapComponent from '../../components/mapComponent/MapComponent';
 import "./mainPage.css"
-import '../../fonts/SegoeBold.ttf';
 import MyButton from '../../components/myButton/MyButton';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
