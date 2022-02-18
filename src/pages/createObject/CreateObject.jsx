@@ -92,12 +92,18 @@ const CreateObject = () => {
 
     useEffect(()=>{
         if(id){
-            fetchOneObjectByAdmin(51).then(data=>{
+            fetchOneObjectByAdmin(id).then(data=>{
                 data.content.name_ru && setName_ru(data.content.name_ru)
                 data.content.name_kk && setName_kk(data.content.name_kk)
                 data.content.name_en && setName_en(data.content.name_en)
 
                 setType(data.content.type)
+                if (data.content.type.id === 2){
+                    if(data.content.isMagistral === 1){
+                        console.log(data.content.isMagistral)
+                        setIsMagistral(true)
+                    }
+                }
                 setStatus(data.content.status)
 
                 data.content.location && setLocation(data.content.location)
@@ -251,6 +257,8 @@ const CreateObject = () => {
         videoUrl4 && formData.append('video[3]', videoUrl4);
         videoUrl5 && formData.append('video[4]', videoUrl5);
 
+        isMagistral && formData.append('isMagistral', 1) 
+
         if(images){
             let j=0;
             console.log(images)
@@ -361,7 +369,7 @@ const CreateObject = () => {
             </div>
 
 
-            {type.id ===2 || type.id ===3 ? <> <input type="checkbox" className="custom-checkbox" id="happy"/>
+            {type.id ===2 || type.id ===3 ? <> <input type="checkbox" checked={isMagistral} className="custom-checkbox" id="happy"/>
             <label htmlFor="happy" onClick={()=>setIsMagistral(!isMagistral)}>Магистральный</label></> :<></>}
 
             <div className="label">Местоположение *</div>
