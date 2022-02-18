@@ -118,7 +118,7 @@ const ItemPage = () => {
       <p className="text__description text-size" dangerouslySetInnerHTML={{ __html: item.developer }} />}
 
       <p className="text__title">Эскизный проект</p>
-      {item.project_draft ? <img  src={"https://dev14.panama.kz" + item.project_draft.url} alt="travel" className="slider-img"/> : <></>}
+      {item.project_draft ? <img  src={"https://dev14.panama.kz" + item.project_draft[0].url} alt="travel" className="slider-img"/> : <></>}
       
       <div className="line"></div>
     <MyButton variant="orange">{t("button")}
