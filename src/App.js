@@ -8,7 +8,6 @@ import Footer from './components/footer/Footer';
 import Helmet from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { Context } from '.';
-import UserCreatePage from './pages/userCreatePage/UserCreatePage';
 import { check, resetPassword } from './http/userApi';
 import CreateObject from './pages/createObject/CreateObject';
 import ObjectsPage from './pages/objectsPage/ObjectsPage';
