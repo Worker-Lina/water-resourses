@@ -1,0 +1,27 @@
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pagination-page{
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.pagination-page:hover, .page-active{
+    color: #ffff;
+    background-color: #5584AC;
+}
+.pagination-arrow{
+    font-size: 20px;
+    color: rgb(104, 103, 103);
+    margin:0 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.page-noactive{
+    color: rgb(206, 206, 206);
+}

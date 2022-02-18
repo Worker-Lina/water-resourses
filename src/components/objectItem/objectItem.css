@@ -1,0 +1,13 @@
+.user__item__status{
+    padding: 8px 15px;
+    background-color: #3d9998;
+    width:fit-content;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    border-radius: 20px;
+}
+.develop{
+    background-color: #f1c84c;
+}

@@ -1,0 +1,8 @@
+.user__item{
+    display: grid;
+    grid-template-columns: 10% 1fr 1fr 1fr;
+    align-items: center;
+}
+.user__item__text{
+    font-size: 14px;
+}

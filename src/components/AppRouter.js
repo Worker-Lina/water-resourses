@@ -1,12 +1,20 @@
-import React from 'react'
+import { observer } from 'mobx-react-lite';
+import React, { useContext } from 'react'
 import { Navigate , Route, Routes } from 'react-router-dom'
-import { publicRoutes } from '../routes';
+import { Context } from '..';
+import { authRoutes, publicRoutes } from '../routes';
 import { MAINPAGE_ROUTE } from '../utils/consts';
 
 
-const AppRouter = () => {
+const AppRouter = observer(() => {
+    const {user} = useContext(Context)
+
+    console.log(user.isAuth)
     return (
         <Routes>
+            {user.isAuth && authRoutes.map(({path, Component}) =>
+                <Route key={path} path={path} element={<Component></Component>} exact/>
+            )}
             {publicRoutes.map(({path, Component}) =>
                 <Route key={path} path={path} element={<Component></Component>} exact/>
             )}
@@ -17,6 +25,6 @@ const AppRouter = () => {
             />
         </Routes>
     );
-};
+});
 
 export default AppRouter

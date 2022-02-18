@@ -36,10 +36,12 @@ const ItemPage = () => {
       slides = null
     }
     slides = slides.filter((el) =>{
-      return (el != null && el != "")
+      return (el !== null && el !== "")
     })
     return slides
   }
+
+  
 
 
   return <div className="item__page">
@@ -116,7 +118,8 @@ const ItemPage = () => {
       <p className="text__description text-size" dangerouslySetInnerHTML={{ __html: item.developer }} />}
 
       <p className="text__title">Эскизный проект</p>
-      <Slider images={item.project_draft}></Slider>
+      <img  src={"https://dev14.panama.kz" + item.project_draft[0].url} alt="travel" className="slider-img"/> :
+      
       <div className="line"></div>
     <MyButton variant="orange">{t("button")}
       <svg className="modal-svg" width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">

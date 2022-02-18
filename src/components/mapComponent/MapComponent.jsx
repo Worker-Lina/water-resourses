@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import "./mapComponent.css"
-import { MapContainer, Marker, Polygon, Polyline, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, Polygon, Polyline, TileLayer, useMapEvents } from 'react-leaflet';
 import {  animPolylines, polygones, polylines, titles } from './MapData';
 import Modal from '../modal/Modal';
 import { divIcon, polyline} from 'leaflet';
@@ -10,9 +10,10 @@ import { fetchObjects } from '../../http/reservoirApp';
 import vector from "../../imgs/Vector.svg"
 import orange from "../../imgs/orange.svg"
 import green from "../../imgs/green.svg"
+import red from "../../imgs/red.svg"
 import { Icon } from 'leaflet';
 
-const MapComponent = ({textVisible, setTextVisible}) => {
+const MapComponent = ({textVisible, setTextVisible, props, location, setLocation}) => {
   const [active, setActive]=useState(false)
   const [center, setCenter]=useState([42.97045762155687,68.94681841702852])
   const [idItem, setIdItem] = useState(41)
@@ -41,6 +42,7 @@ const MapComponent = ({textVisible, setTextVisible}) => {
   const blueIcon = new LeafIcon({iconUrl: vector})
   const orangeIcon = new LeafIcon({iconUrl: orange})
   const greenIcon = new LeafIcon({iconUrl: green})
+  const redIcon = new LeafIcon({iconUrl: red})
   const limeOptions = { color: '#0FB7E6' }
 
   useEffect(()=>{
@@ -75,6 +77,21 @@ const MapComponent = ({textVisible, setTextVisible}) => {
       document.getElementById('footer').classList.remove('footer-hidden');
     }
   }
+  const [positionMarker, setPositionMarker] = useState(null)
+
+  function LocationMarker() {
+    const map = useMapEvents({
+      click(e) {
+        setPositionMarker(e.latlng)
+        setLocation({"lat": e.latlng.lat, "lng": e.latlng.lng})
+      },
+    })
+  
+    return positionMarker === null ? null : (
+      <Marker position={positionMarker} icon={redIcon}>
+      </Marker>
+    )
+  }
 
   return(<div className="map__container">
      <MapContainer whenCreated={ mapInstance => { mapRef.current = mapInstance; addPolylinesToMap() } } className="myMap" center={center} zoom={zoom} scrollWheelZoom={false} zoomControl={false} doubleClickZoom={false} maxBounds={maxBounds}>
@@ -101,6 +118,7 @@ const MapComponent = ({textVisible, setTextVisible}) => {
       <path d="M9.33333 3.04762C9.33333 2.76977 9.22296 2.50331 9.02649 2.30684C8.83003 2.11037 8.56356 2 8.28571 2C8.00787 2 7.7414 2.11037 7.54494 2.30684C7.34847 2.50331 7.23809 2.76977 7.23809 3.04762V6.19048C7.23809 6.46832 7.12772 6.73479 6.93125 6.93125C6.73479 7.12772 6.46832 7.23809 6.19048 7.23809H3.04762C2.76977 7.23809 2.50331 7.34847 2.30684 7.54494C2.11037 7.7414 2 8.00787 2 8.28571C2 8.56356 2.11037 8.83003 2.30684 9.02649C2.50331 9.22296 2.76977 9.33333 3.04762 9.33333H6.19048C7.02401 9.33333 7.82341 9.00221 8.41281 8.41281C9.00221 7.82341 9.33333 7.02401 9.33333 6.19048V3.04762Z" fill="#5584AC"/>
       </svg></div>
 
+        <LocationMarker/>
     </MapContainer> 
       {active ? <Modal id={idItem} active={active} setActive={setActive} mapRef={mapRef} zoom={zoom} center={center}></Modal>: <></>}
     </div>

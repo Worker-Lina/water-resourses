@@ -2,24 +2,24 @@ import {makeAutoObservable} from "mobx";
 
 export default class ItemStore{
     constructor(){
-        this._reservoirs = []
+        this._users = []
         this._selectedReservoir = {}
         makeAutoObservable(this)
     }
 
-    setReservoirs(reservoirs){
-        this._reservoirs = reservoirs
+    setUsers(users){
+        this._users = users
     }
 
-    setSelectedReservoir(selectedReservior){
-        this._selectedReservoir = selectedReservior
+    setSelectedUser(selectedUser){
+        this._selecteduser = selectedUser
     }
 
-    get reservoirs(){
-        return this._reservoirs
+    get users(){
+        return this._users
     }
-    get reservoir(){
-        return this._selectedReservoir
+    get user(){
+        return this._selectedUser
     }
 
 }

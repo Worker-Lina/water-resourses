@@ -1,0 +1,12 @@
+.users__page{
+    padding: 110px 10% 30px;
+    background-color: #eeeeee;
+}
+.users__page__icon{
+    font-size: 22px;
+    line-height: 0;
+    margin-right: 10px;
+}
+.users__page .page__subtitle{
+    margin-right: 10px;
+}

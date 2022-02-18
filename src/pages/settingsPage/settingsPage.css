@@ -1,0 +1,35 @@
+.setting__page{
+    width: 100%;
+    background: #eeeeee;
+    padding: 110px 10% 30px;
+}
+.setting__page__item{
+    display: flex;
+    margin-bottom: 30px;
+}
+.setting__page__title{
+    font-size: 24px;
+    font-weight: 600;
+    margin-left: 20px;
+}
+.button__left{
+    content: "";
+    width: 7px;
+    height: 7px;
+    border: 2px solid #ffff;
+    border-bottom: none;
+    border-right: none;
+    transform: translateX(5px) rotate(-45deg);
+    margin-right: 10px;
+}
+.setting__page .input{
+    margin-bottom: 10px;
+}
+.setting__page__subtitle{
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.setting__page .page__subtitle{
+    margin-left: 10px;
+}

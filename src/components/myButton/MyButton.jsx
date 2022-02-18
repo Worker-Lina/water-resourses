@@ -14,12 +14,16 @@ const MyButton = ({children, ...props}) => {
                 return "btn btn-orange btn-small";
             case 'orange':
                 return "btn btn-orange";
+            case 'green':
+                return "btn btn-green";
             case 'orange large':
                 return "btn btn-orange btn-large"
             case 'border small':
                 return "btn btn-border btn-small";
             case 'border':
                 return "btn btn-border";
+            case 'border red':
+                return "btn btn-border btn-red";
             case 'border large':
                 return "btn btn-border btn-large";
             default:

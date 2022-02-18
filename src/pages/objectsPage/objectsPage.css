@@ -1,0 +1,8 @@
+.objects__page{
+    width: 100%;
+    background: #eeeeee;
+    padding: 110px 10% 30px;
+}
+.objects__page .page__subtitle{
+    margin-right: 10px;
+}

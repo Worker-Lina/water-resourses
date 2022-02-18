@@ -1,0 +1,50 @@
+.response__container{
+    width: 250px;
+    border-radius: 4px;
+    background-color: #ffff;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    z-index: 10;
+}
+.response__content{
+    display: flex;
+    flex-direction: column; 
+    padding: 10px 10px;
+}
+.success{
+    width: 22px;
+    height: 22px;
+    background-color: #07bc0c;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+.error{
+    background-color: #eb5757;
+}
+.close__icon{
+    color: #bcbcbc;
+}
+.success__icon{
+    color: #ffff;
+}
+.response__close{
+    align-self: flex-end;
+    cursor: pointer;
+}
+.response__request{
+    display: flex;
+    align-items: center;
+}
+.success__line{
+    background-color: #07bc0c;
+    height: 4px;
+    border-radius: 4px;
+}
+
+.error__line{
+    background-color: #eb5757;
+}

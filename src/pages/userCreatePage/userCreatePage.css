@@ -1,0 +1,13 @@
+.userCreatePage{
+    padding: 110px 10% 30px;
+    background-color:#eeeeee;
+}
+.userCreatePage .page__subtitle{
+    margin-left: 10px;
+}
+.userCreatePage__newPassword{
+    background-color: #c5fddf;
+    color: #20782e;
+    padding: 10px 25px;
+    border-radius: 4px;
+}

@@ -51,11 +51,6 @@
     color:  #474A57;
     margin-bottom: 15px;
 }
-.line{
-    height: 1px;
-    background-color: #EEEFF4;
-    margin: 15px 0;
-}
 
 .modal__buttons{
     display: flex;
