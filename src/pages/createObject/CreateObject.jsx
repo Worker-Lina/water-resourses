@@ -10,10 +10,12 @@ import MapComponent from '../../components/mapComponent/MapComponent'
 import ImgUpload from '../../components/createObjectsComponents/ImgUpload'
 import { createObject, fetchObjectsStatus, fetchObjectsTypes, fetchOneObjectByAdmin, updateObject, uploadImage } from '../../http/reservoirApp'
 import { useParams } from 'react-router';
+import ResponseRequets from '../../components/responseRequest/ResponseRequets'
 
 const CreateObject = () => {
     const {id} = useParams()
-    //const {id} = useState(true)
+    const [active, setActive]= useState(false)
+    const [success, setSuccess]= useState(false)
     const [firstSelectActive, setFirstSelectActive] = useState(false)
     const [secondSelectActive, setSecondSelectActive] = useState(false)
     const [images, setImages] = useState([])
@@ -83,8 +85,6 @@ const CreateObject = () => {
     const [objectsTypes, setObjectsTypes] = useState(null) 
     const [objectsStatus, setObjectsStatus] = useState(null) 
 
-    const [tryObject, setTryObjec] = useState(false)
-    
     useEffect(()=>{
         fetchObjectsTypes().then(data => setObjectsTypes(data.content[0]));
         fetchObjectsStatus().then(data => setObjectsStatus(data.content[0]))
@@ -98,11 +98,9 @@ const CreateObject = () => {
                 data.content.name_en && setName_en(data.content.name_en)
 
                 setType(data.content.type)
-                if (data.content.type.id === 2){
-                    if(data.content.isMagistral === 1){
-                        console.log(data.content.isMagistral)
-                        setIsMagistral(true)
-                    }
+                if ((data.content.type.id === 2 || data.content.type.id === 3) && data.content.isMagistral === 1){
+                    console.log(data.content.isMagistral)
+                    setIsMagistral(true)
                 }
                 setStatus(data.content.status)
 
@@ -158,28 +156,20 @@ const CreateObject = () => {
     },[id])   
 
 
-    function dragStartHandler(e){
-        e.preventDefault();
-      }
-      function dragLeaveHandler(e){
-        e.preventDefault();
-      }
-      const genUUID = () => {
+    function dragStartHandler(e){ e.preventDefault(); }
+    function dragLeaveHandler(e){ e.preventDefault(); }
+    function genUUID() {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
           var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8)
           return v.toString(16)
         })
-      }
+    }
 
-      async function ondropHandler(e){
-          if(images.length >=5){
-              return 
-          }
+    async function ondropHandler(e){
         e.preventDefault();
+        if (images.length >=5) { return } // если изоб-ий больше 5 прервать
         let files = [...e.dataTransfer.files]
-        if(files[0].size >= 5242880){
-            return
-        }
+        if(files[0].size >= 5242880){ return } // если размер больше 5 мб прервать
         setFilesSend([...filesSend, files[0]])
         var reader = new FileReader();
         reader.onload = function (e) {
@@ -187,25 +177,21 @@ const CreateObject = () => {
             setImages([...images, img] )
         }        
         reader.readAsDataURL(files[0]);
-      }
+    }
 
-      async function sendFormData(){
+    async function sendFormData(){
         const formData = new FormData()
-
         formData.append('name_ru', name_ru);
         name_kk && formData.append('name_kk', name_kk);
         name_en && formData.append('name_en', name_en);
-
         formData.append('type', type.id);
-
         if(location){
             formData.append(`location[lat]`, location["lat"]);
             formData.append(`location[lng]`, location["lng"]);
         }
-
         volume && formData.append('volume', volume);
         formData.append('status', status.id);
-        if(type.id === 2 || type.id ===3){
+        if(type.id === 2 || type.id ===3 ){
             formData.append('isMagistral', isMagistral ? 1 : 0);
             formData.append('length', length)
         }
@@ -261,19 +247,18 @@ const CreateObject = () => {
 
         if(images){
             let j=0;
-            console.log(images)
             for(let i=0; i<images.length;i++){
                 if(images[i].id){
-                    let imgFormData = new FormData()
-                    imgFormData.append('file', filesSend[j])
+                    let imgFormData = new FormData();
+                    imgFormData.append('file', filesSend[j]);
                     let data = await uploadImage(imgFormData);
-                    formData.append(`photos[${i}][url]`, data.content.value)
-                    j=j+1
+                    formData.append(`photos[${i}][url]`, data.content.value);
+                    j=j+1;
                 }else{
-                    formData.append(`photos[${i}][url]`, images[i].url)
+                    formData.append(`photos[${i}][url]`, images[i].url);
                 }
-                formData.append(`photos[${i}][type]`,images[i].type)
-                formData.append(`photos[${i}][name]`, images[i].name)
+                formData.append(`photos[${i}][type]`,images[i].type);
+                formData.append(`photos[${i}][name]`, images[i].name);
             }
         }
         
@@ -319,19 +304,16 @@ const CreateObject = () => {
             formData.append(`project_draft_en[0][name]`, project_draft_en.name)
         }
 
-        for(let [name, value] of formData) {
-            console.log(`${name} = ${value}`); 
-        }  
         if(id){
-            updateObject(123, formData).then(data => console.log(data))
+            updateObject(123, formData).then(data => {console.log(data); setActive(true); setSuccess(true)});
         }else{
-            createObject(formData).then(data=>console.log("data ", data))    
+            createObject(formData).then(data=>{console.log("data ", data); setActive(true); setSuccess(true)}); 
         }   
-        
       }
 
   return (
     <div className="create__object__page">
+        {active ? <ResponseRequets success={success} setActive={setActive} /> : <></>}
         <div className="page__item">
             <Link to={OBJECTS_ROUTE}><MyButton variant="blue"><span className="button__left"> </span>Назад</MyButton></Link>
             <div className="page__subtitle">{id ? "Редактирование" : "Создание"} объекта</div>
@@ -368,9 +350,8 @@ const CreateObject = () => {
                 </div>
             </div>
 
-
-            {type.id ===2 || type.id ===3 ? <> <input type="checkbox" checked={isMagistral} className="custom-checkbox" id="happy"/>
-            <label htmlFor="happy" onClick={()=>setIsMagistral(!isMagistral)}>Магистральный</label></> :<></>}
+            {type.id ===2 || type.id ===3 ? <> <input type="checkbox" checked={isMagistral} onChange={()=>setIsMagistral(!isMagistral)} className="custom-checkbox" id="happy"/>
+            <label htmlFor="happy">Магистральный</label></> :<></>}
 
             <div className="label">Местоположение *</div>
             <MapComponent location={location} setLocation={setLocation}/>
@@ -407,19 +388,15 @@ const CreateObject = () => {
                 <TinyComponent text="Задача объекта (на русском)" item={goal_ru} setItem={setGoal_ru}/>
                 <TinyComponent text="Задача объекта (на казахском)" item={goal_kk} setItem={setGoal_kk}/>
                 <TinyComponent text="Задача объекта (на английском)" item={goal_en} setItem={setGoal_en}/>
-
                 <TinyComponent text="Ожидаемый результат (на русском)" item={expectation_ru} setItem={setExpectation_ru}/>
                 <TinyComponent text="Ожидаемый результат (на казахском)" item={expectation_kk} setItem={setExpectation_kk}/>
                 <TinyComponent text="Ожидаемый результат (на английском)" item={expectation_en} setItem={setExpectation_en}/>
-                
                 <TinyComponent text="Источник воды (на русском)" item={water_spring_ru} setItem={setWater_spring_ru}/>
                 <TinyComponent text="Источник воды  (на казахском)" item={water_spring_kk} setItem={setWater_spring_kk}/>
                 <TinyComponent text="Источник воды  (на английском)" item={water_spring_en} setItem={setWater_spring_en}/>
-                
                 <TinyComponent text="Водоотведение (на русском)" item={water_disposal_ru} setItem={setWater_disposal_ru}/>
                 <TinyComponent text="Водоотведение (на казахском)" item={water_disposal_kk} setItem={setWater_disposal_kk}/>
                 <TinyComponent text="Водоотведение (на английском)" item={water_disposal_en} setItem={setWater_disposal_en}/>
-
                 <TinyComponent text="Техническое решение (на русском)" item={technical_solution_ru} setItem={setTechnical_solution_ru}/>
                 <TinyComponent text="Техническое решение (на казахском)" item={technical_solution_kk} setItem={setTechnical_solution_kk}/>
                 <TinyComponent text="Техническое решение (на английском)" item={technical_solution_en} setItem={setTechnical_solution_en}/>
@@ -429,13 +406,10 @@ const CreateObject = () => {
                 <TinyComponent text="Ответственное лицо (на русском)" item={responsible_person_ru} setItem={setResponsible_person_ru}/>
                 <TinyComponent text="Ответственное лицо (на казахском)" item={responsible_person_kk} setItem={setResponsible_person_kk}/>
                 <TinyComponent text="Ответственное лицо (на английском)" item={responsible_person_en} setItem={setResponsible_person_en}/>
-
                 <TinyComponent className="tiny-full-screen" text="Объем финансирования" item={total_funding} setItem={setTotal_funding}/>
-
                 <TinyComponent text="Проектировщик (на русском)" item={planner_ru} setItem={setPlanner_ru}/>
                 <TinyComponent text="Проектировщик (на казахском)" item={planner_kk} setItem={setPlanner_kk}/>
                 <TinyComponent text="Проектировщик (на английском)" item={planner_en} setItem={setPlanner_en}/>
-
                 <TinyComponent text="Застройщик (на русском)" item={developer_ru} setItem={setDeveloper_ru}/>
                 <TinyComponent text="Застройщик (на казахском)" item={developer_kk} setItem={setDeveloper_kk}/>
                 <TinyComponent text="Застройщик (на английском)" item={developer_en} setItem={setDeveloper_en}/>

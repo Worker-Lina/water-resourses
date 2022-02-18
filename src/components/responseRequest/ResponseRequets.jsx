@@ -1,7 +1,7 @@
 import React from 'react'
 import "./responseRequest.css"
 
-const ResponseRequets = ({success, active, setActive}) => {
+const ResponseRequets = ({success, setActive}) => {
   return (<div className="response__container">
     <div className="response__content">
         <div className="response__close" onClick={()=>setActive(false)}>

@@ -27,7 +27,9 @@ export const login = async (email, password) => {
         'language': i18n.language
     }
     const {data} = await axios.post('https://dev14.panama.kz/api/auth/login', article, { headers })
-    localStorage.setItem('token', data.content.token)
+    if(data.statusCode === 200){
+        localStorage.setItem('token', data.content.token)
+    }
     return data
 }
 

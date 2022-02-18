@@ -10,16 +10,17 @@ const LoginForm = ({active, setActive}) => {
     const [password, setPassword] =useState('')
 
     const userLogIn = async () => {
-      try {
-          let data;
-          data = await login(email, password);
+      login(email, password).then(data => {
+        console.log(data);
+        if(data.statusCode === 200){
           user.setUser(user)
           user.setIsAuth(true)
           setActive(false)
-      } catch (e) {
-          alert(e.response.data.message)
-      }
-  }
+        }else{
+          alert(data.message)
+        }}
+      )
+    }
 
   return (
     <div className={active ? "login-form" : "login-form-unvisible"} style={{height:`${window.innerHeight}px`}} onClick={(e)=>{setActive(false); e.stopPropagation()}}>
