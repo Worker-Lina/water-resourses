@@ -12,6 +12,15 @@ export const createUser = async (name, email) => {
     return data
 }
 
+export const updateUser = async (id, name, email) => {
+    const article = { name: name, email: email };
+    const headers = { 
+        'language': i18n.language
+    }
+    const {data} = await $authHost.post('/api/admin/users/'+id, article, {headers})
+    return data
+}
+
 export const login = async (email, password) => {
     const article = { email: email, password: password };
     const headers = { 
@@ -66,3 +75,11 @@ export const resetPassword = async (id) => {
     return data
 }
 
+
+export const fecthOneUser = async (id) => {
+    const headers = { 
+        'language': i18n.language
+    }
+    const {data} = await $authHost.get('/api/admin/users/'+id, { headers })
+    return data
+}

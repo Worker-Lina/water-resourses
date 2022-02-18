@@ -32,6 +32,10 @@ export const authRoutes = [
     {
         path: CREATE_OBJECT_ROUTE+'/:id',
         Component: CreateObject
+    },
+    {
+        path: USER_CREATE_ROUTE+'/:id',
+        Component: UserCreatePage
     }
 ]
 

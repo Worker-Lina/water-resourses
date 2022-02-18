@@ -82,6 +82,8 @@ const CreateObject = () => {
 
     const [objectsTypes, setObjectsTypes] = useState(null) 
     const [objectsStatus, setObjectsStatus] = useState(null) 
+
+    const [tryObject, setTryObjec] = useState(false)
     
     useEffect(()=>{
         fetchObjectsTypes().then(data => setObjectsTypes(data.content[0]));
@@ -89,8 +91,8 @@ const CreateObject = () => {
     }, [])
 
     useEffect(()=>{
-        
-            fetchOneObjectByAdmin(123).then(data=>{
+        if(id){
+            fetchOneObjectByAdmin(51).then(data=>{
                 data.content.name_ru && setName_ru(data.content.name_ru)
                 data.content.name_kk && setName_kk(data.content.name_kk)
                 data.content.name_en && setName_en(data.content.name_en)
@@ -146,8 +148,8 @@ const CreateObject = () => {
                 data.content.project_draft_kk && setProject_draft_kk(data.content.project_draft_kk[0])
                 data.content.project_draft_en && setProject_draft_en(data.content.project_draft_en[0])
             })
-        
-    },[])   
+        }
+    },[id])   
 
 
     function dragStartHandler(e){
@@ -311,10 +313,12 @@ const CreateObject = () => {
 
         for(let [name, value] of formData) {
             console.log(`${name} = ${value}`); 
-        }       
-        updateObject(123, formData).then(data => console.log(data))
-        
-            //createObject(formData).then(data=>console.log("data ", data))   
+        }  
+        if(id){
+            updateObject(123, formData).then(data => console.log(data))
+        }else{
+            createObject(formData).then(data=>console.log("data ", data))    
+        }   
         
       }
 
@@ -347,7 +351,7 @@ const CreateObject = () => {
                     <div className="label">Статус объекта *</div>
                     <div className="object__page_select">
                         <p className="select__value">{status.name}</p>
-                        {status ? <span onClick={()=>{setStatus('');} } className="select-cross">&#10006;</span> : ""}
+                        {status ? <span onClick={()=>{setStatus('');}} className="select-cross">&#10006;</span> : ""}
                         <span className="select-line"></span>
                         <div onClick={()=>setSecondSelectActive(!secondSelectActive)} className={secondSelectActive ? "select-icon select-icon-active": "select-icon"} ></div>
                     </div>
@@ -356,16 +360,17 @@ const CreateObject = () => {
                 </div>
             </div>
 
-            {type.id === 2 || type.id ===3 ? <><input type="checkbox" className="custom-checkbox" id="happy"/>
-            <label htmlFor="happy" onClick={setIsMagistral(!isMagistral)}>Магистральный</label></> : <></>}
+
+            {type.id ===2 || type.id ===3 ? <> <input type="checkbox" className="custom-checkbox" id="happy"/>
+            <label htmlFor="happy" onClick={()=>setIsMagistral(!isMagistral)}>Магистральный</label></> :<></>}
 
             <div className="label">Местоположение *</div>
             <MapComponent location={location} setLocation={setLocation}/>
 
-            <div className="label">{type === 2 || type===3 ? "Водоотдача":"Объем" } (м<sup><small>3</small></sup>) *</div>
+            <div className="label">{type.id === 2 || type.id ===3 ? "Водоотдача":"Объем" } (м<sup><small>3</small></sup>) *</div>
             <input className="input" type="text" value={volume} onChange={(e)=>setVolume(e.target.value)}></input>
 
-            {type ===2 || type.id ===3 ? <><div className="label">Протяженность (км)</div>
+            {type.id ===2 || type.id ===3 ? <><div className="label">Протяженность (км)</div>
             <input className="input" type="text" value={length} onChange={(e)=>setLength(e.target.value)}></input></>:<></>}
             
             <div className="label">Фотографии *</div>
