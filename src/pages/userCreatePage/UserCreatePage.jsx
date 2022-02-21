@@ -7,6 +7,7 @@ import { USERS_ROUTE } from '../../utils/consts'
 import "./userCreatePage.css"
 import { useParams } from 'react-router';
 import ResponseRequets from '../../components/responseRequest/ResponseRequets'
+import { emailValidation, nameValidate } from '../../utils/validate'
 
 const UserCreatePage = () => {
     const {id} = useParams()
@@ -19,6 +20,7 @@ const UserCreatePage = () => {
     const [active, setActive] = useState(false) 
     const [successRequest, setSuccessRequest] = useState(false) 
     const [isCorrectEmail, setIsCorrectEmail] = useState(true)
+    const [isCorrectFullName, setIsCorrectFullName] = useState(true)
 
     useEffect(()=>{
         if(id){
@@ -26,12 +28,12 @@ const UserCreatePage = () => {
         }
     },[id])
 
-    function emailValidation(value) {
-        let txt = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return txt.test(value);
-    }
-
     const userCreate = async () => {
+        if(!nameValidate(fullName)){
+            setIsCorrectFullName(false)
+            return
+        }
+        setIsCorrectFullName(true)
         if(!emailValidation(email)){
             setIsCorrectEmail(false)
             return
@@ -59,10 +61,11 @@ const UserCreatePage = () => {
         </div>
         <div className="page__form">
             <div className="label">ФИО *</div>
-            <input className="input" type="text" placeholder="ФИО" value={fullName} onChange={e=>setFullName(e.target.value)}></input>
+            <input className={isCorrectFullName ? "input" : "input input-error"} type="text" placeholder="ФИО" value={fullName} onChange={e=>setFullName(e.target.value)}></input>
+            {isCorrectFullName ? <></> : <div className="label error-label">Введено некорректное имя</div>}
             <div className="label">E-mail *</div>
             {isCorrectEmail ? <></> : <div className="label error-label">Введен некорректный E-mail</div>}
-            <input className={isCorrectEmail ? "input" : "input input-error"}placeholder="e-mail" type="email" value={email} onChange={e=>setEmail(e.target.value)}></input>
+            <input className={isCorrectEmail ? "input" : "input input-error"} placeholder="e-mail" type="email" value={email} onChange={e=>setEmail(e.target.value)}></input>
             {visible ? <div className="userCreatePage__newPassword">Новый пароль: {password}</div> : <></>}
             <div className="line"></div>
             <div className="page__buttons">

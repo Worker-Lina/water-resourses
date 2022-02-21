@@ -4,6 +4,7 @@ import { useState } from 'react/cjs/react.development'
 import MyButton from '../../components/myButton/MyButton'
 import ResponseRequets from '../../components/responseRequest/ResponseRequets'
 import { updatePassword, updateProfile, updateUser } from '../../http/userApi'
+import { emailValidation, passwordValidate } from '../../utils/validate'
 import "./settingsPage.css"
 
 const SettingsPage = () => {
@@ -16,16 +17,6 @@ const SettingsPage = () => {
     const [isCorrectEmail, setIsCorrectEmail] = useState(true)
     const [isCorrectPassword, setIsCorrectPassword] = useState(true)
     const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(true)
-
-    function emailValidation(value) {
-        let txt = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return txt.test(value);
-    }
-
-    function passwordValidate(value){
-        var re = /[a-z]\d|\d[a-z]/i;
-        return re.test(value) && value.length > 4;
-    }
 
     const updateMyProfile = async () =>{
         if(!emailValidation(email)){
@@ -41,7 +32,6 @@ const SettingsPage = () => {
         }
     }
 
-
     const updateMyPassword = async () =>{
         if(!passwordValidate(password)){
             setIsCorrectPassword(false)
@@ -53,13 +43,13 @@ const SettingsPage = () => {
             return
         }
         setIsPasswordConfirmed(true)
-        /*try{
+        try{
             updatePassword(password, confirmedPassword).then(data=>{console.log(data); setPassword(''); setConfirmedPassword('');
             setSuccess(true); setActive(true)})
         }catch(e){
             setSuccess(false); setActive(true)
             console.log(e)
-        }*/
+        }
     }
 
   return (
