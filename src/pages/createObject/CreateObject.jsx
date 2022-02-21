@@ -85,6 +85,11 @@ const CreateObject = () => {
     const [objectsTypes, setObjectsTypes] = useState(null) 
     const [objectsStatus, setObjectsStatus] = useState(null) 
 
+    const [isCorrectName_ru, setIsCorrectName_ru]= useState(true)
+    const [isCorrectLocation, setIsCorrectLocation]= useState(true)
+    const [isCorrectType, setIsCorrectType]= useState(true)
+    const [isCorrectStatus, setIsCorrectStatus]= useState(true)
+
     useEffect(()=>{
         fetchObjectsTypes().then(data => setObjectsTypes(data.content[0]));
         fetchObjectsStatus().then(data => setObjectsStatus(data.content[0]))
@@ -96,58 +101,47 @@ const CreateObject = () => {
                 data.content.name_ru && setName_ru(data.content.name_ru)
                 data.content.name_kk && setName_kk(data.content.name_kk)
                 data.content.name_en && setName_en(data.content.name_en)
-
                 setType(data.content.type)
                 if ((data.content.type.id === 2 || data.content.type.id === 3) && data.content.isMagistral === 1){
                     console.log(data.content.isMagistral)
                     setIsMagistral(true)
                 }
                 setStatus(data.content.status)
-
                 data.content.location && setLocation(data.content.location)
                 data.content.volume && setVolume(data.content.volume)
                 data.content.photos && setImages(data.content.photos)
-
                 data.content.goal_ru && setGoal_ru(data.content.goal_ru)
                 data.content.goal_kk && setGoal_kk(data.content.goal_kk)
                 data.content.goal_en && setGoal_en(data.content.goal_en)
-
                 data.content.expectation_ru && setExpectation_ru(data.content.expectation_ru)
                 data.content.expectation_kk && setExpectation_kk(data.content.expectation_kk)
                 data.content.expectation_en && setExpectation_en(data.content.expectation_en)
-
                 data.content.water_spring_ru && setWater_spring_ru(data.content.water_spring_ru)
                 data.content.water_spring_kk && setWater_spring_kk(data.content.water_spring_kk)
                 data.content.water_spring_en && setWater_spring_en(data.content.water_spring_en)
-
                 data.content.water_disposal_ru && setWater_disposal_ru(data.content.water_disposal_ru)
                 data.content.water_disposal_kk && setWater_disposal_kk(data.content.water_disposal_kk)
                 data.content.water_disposal_en && setWater_disposal_en(data.content.water_disposal_en)
-
                 data.content.technical_solution_ru && setTechnical_solution_ru(data.content.technical_solution_ru)
                 data.content.technical_solution_kk && setTechnical_solution_kk(data.content.technical_solution_kk)
                 data.content.technical_solution_en && setTechnical_solution_en(data.content.technical_solution_en)
-
                 data.content.responsible_person_ru && setResponsible_person_ru(data.content.responsible_person_ru)
                 data.content.responsible_person_kk && setResponsible_person_kk(data.content.responsible_person_kk)
                 data.content.responsible_person_en && setResponsible_person_en(data.content.responsible_person_en)
-
                 data.content.total_funding && setTotal_funding(data.content.total_funding)
-
                 data.content.planner_ru && setPlanner_ru(data.content.planner_ru)
                 data.content.planner_kk && setPlanner_kk(data.content.planner_kk)
                 data.content.planner_en && setPlanner_en(data.content.planner_en)
-
                 data.content.description_ru && setDeveloper_ru(data.content.description_ru)
                 data.content.description_kk && setDeveloper_kk(data.content.description_kk)
                 data.content.description_en && setDeveloper_en(data.content.description_en)
-                
-                data.content.video[0] && setVideoUrl1(data.content.video[0])
-                data.content.video[1] && setVideoUrl2(data.content.video[1])
-                data.content.video[2] && setVideoUrl3(data.content.video[2])
-                data.content.video[3] && setVideoUrl4(data.content.video[3])
-                data.content.video[4] && setVideoUrl5(data.content.video[4])
-
+                if (data.content.video){
+                    data.content.video[0] && setVideoUrl1(data.content.video[0])
+                    data.content.video[1] && setVideoUrl2(data.content.video[1])
+                    data.content.video[2] && setVideoUrl3(data.content.video[2])
+                    data.content.video[3] && setVideoUrl4(data.content.video[3])
+                    data.content.video[4] && setVideoUrl5(data.content.video[4])
+                }
                 data.content.project_draft_ru && setProject_draft_ru(data.content.project_draft_ru[0])
                 data.content.project_draft_kk && setProject_draft_kk(data.content.project_draft_kk[0])
                 data.content.project_draft_en && setProject_draft_en(data.content.project_draft_en[0])
@@ -179,7 +173,21 @@ const CreateObject = () => {
         reader.readAsDataURL(files[0]);
     }
 
+    function validateFormData(){
+        !name_ru ? setIsCorrectName_ru(false) : setIsCorrectName_ru(true)
+        !location ? setIsCorrectLocation(false) : setIsCorrectLocation(true)
+        !type ? setIsCorrectType(false) :setIsCorrectType(true)
+        !status ? setIsCorrectStatus(false) : setIsCorrectStatus(true)
+        if(!name_ru || !location || !type || !status){
+            return false
+        }
+        return true
+    }
+
     async function sendFormData(){
+        if(!validateFormData()){
+            return
+        }
         const formData = new FormData()
         formData.append('name_ru', name_ru);
         name_kk && formData.append('name_kk', name_kk);
@@ -303,12 +311,13 @@ const CreateObject = () => {
             formData.append(`project_draft_en[0][type]`, project_draft_en.type)
             formData.append(`project_draft_en[0][name]`, project_draft_en.name)
         }
+        console.log("success")
 
-        if(id){
+        /*if(id){
             updateObject(123, formData).then(data => {console.log(data); setActive(true); setSuccess(true)});
         }else{
             createObject(formData).then(data=>{console.log("data ", data); setActive(true); setSuccess(true)}); 
-        }   
+        }  */ 
       }
 
   return (
@@ -320,7 +329,9 @@ const CreateObject = () => {
         </div>
         <div className="page__form">
             <div className="label">Название (на русском) *</div>
-            <input className="input" type="text" value={name_ru} onChange={(e)=>setName_ru(e.target.value)}></input>
+            <input className={isCorrectName_ru ? "input" : "input input-error"} type="text" value={name_ru} onChange={(e)=>setName_ru(e.target.value)}></input>
+            {isCorrectName_ru ? <></> : <div className="label error-label">Поле "Название" обязательно для заполнения</div>}
+
             <div className="label">Название (на казахском) *</div>
             <input className="input" type="text" value={name_kk} onChange={(e)=>setName_kk(e.target.value)}></input>
             <div className="label">Название (на английском) *</div>
@@ -328,7 +339,7 @@ const CreateObject = () => {
             <div className="object__page__selections">
                 <div className="page__select_parent">
                     <div className="label">Тип объекта *</div>
-                    <div className="object__page_select">
+                    <div className={isCorrectType ? "object__page_select" : "object__page_select select-error"}>
                         <p className="select__value">{type.name}</p>
                         {type ? <span className="select-cross" onClick={()=>{setType('')}}>&#10006;</span>: ""}
                         <span className="select-line"></span>
@@ -336,10 +347,11 @@ const CreateObject = () => {
                     </div>
                     {objectsTypes ? <MySelect active={firstSelectActive} setActive={setFirstSelectActive} options={objectsTypes} 
                     setSelectedItem={setType}></MySelect> : <></>}
+                    {isCorrectType ? <></> : <div className="label error-label">Поле "Тип" обязательно для заполнения</div>}
                 </div>
                 <div className="page__select_parent">
                     <div className="label">Статус объекта *</div>
-                    <div className="object__page_select">
+                    <div className={isCorrectStatus ? "object__page_select" : "object__page_select select-error"}>
                         <p className="select__value">{status.name}</p>
                         {status ? <span onClick={()=>{setStatus('');}} className="select-cross">&#10006;</span> : ""}
                         <span className="select-line"></span>
@@ -347,6 +359,7 @@ const CreateObject = () => {
                     </div>
                     {objectsStatus ? <MySelect active={secondSelectActive} setActive={setSecondSelectActive} options={objectsStatus} 
                     setSelectedItem={setStatus}></MySelect> :<></>}
+                    {isCorrectStatus ? <></> : <div className="label error-label">Поле "Статус" обязательно для заполнения</div>}
                 </div>
             </div>
 
@@ -355,6 +368,7 @@ const CreateObject = () => {
 
             <div className="label">Местоположение *</div>
             <MapComponent location={location} setLocation={setLocation}/>
+            {isCorrectLocation ? <></> : <div className="label error-label">Вы не выбрали Местоположение</div>}
 
             <div className="label">{type.id === 2 || type.id ===3 ? "Водоотдача":"Объем" } (м<sup><small>3</small></sup>) *</div>
             <input className="input" type="text" value={volume} onChange={(e)=>setVolume(e.target.value)}></input>

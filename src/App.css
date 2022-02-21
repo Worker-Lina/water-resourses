@@ -150,3 +150,12 @@ body{
 	background-color: #daf7f6;
 	margin-right: 5px;
 }
+.error-label{
+  color: red;
+  margin-bottom: 10px;
+ 
+}
+.input-error{
+  background-color: rgb(240, 164, 164, .4);
+  margin-bottom: 0;
+}

@@ -13,8 +13,18 @@ const SettingsPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmedPassword, setConfirmedPassword] = useState('')
+    const [isCorrectEmail, setIsCorrectEmail] = useState(true)
+
+    function emailValidation(value) {
+        let txt = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return txt.test(value);
+    }
 
     const updateMyProfile = async () =>{
+        if(!emailValidation(email)){
+            setIsCorrectEmail(false)
+            return
+        }
         try{
             updateProfile(fullName, email).then(data=>{console.log(data); setEmail(''); setFullName('');
             setSuccess(true); setActive(true)})
@@ -24,7 +34,12 @@ const SettingsPage = () => {
         }
     }
 
+
     const updateMyPassword = async () =>{
+        if(emailValidation(email)){
+            setIsCorrectEmail(false)
+            return
+        }
         try{
             updatePassword(password, confirmedPassword).then(data=>{console.log(data); setPassword(''); setConfirmedPassword('');
             setSuccess(true); setActive(true)})
@@ -46,7 +61,8 @@ const SettingsPage = () => {
             <div className="label">ФИО *</div>
             <input className="input" type="text" placeholder="ФИО" value={fullName} onChange={e=>setFullName(e.target.value)}></input>
             <div className="label">E-mail *</div>
-            <input className="input" placeholder="e-mail" type="email" value={email} onChange={e=>setEmail(e.target.value)}></input>
+            <input className={isCorrectEmail ? "input" : "input input-error"} placeholder="e-mail" type="email" value={email} onChange={e=>setEmail(e.target.value)}></input>
+            {isCorrectEmail ? <></> : <div className="label error-label">Введен некорректный E-mail</div>}
             <div className="line"></div>
             <div className="page__buttons">
                 <MyButton variant="border red">Отмена</MyButton>

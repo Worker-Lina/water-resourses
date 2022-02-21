@@ -3,7 +3,7 @@ import "./mapComponent.css"
 import { MapContainer, Marker, Polygon, Polyline, TileLayer, useMapEvents } from 'react-leaflet';
 import {  animPolylines, polygones, polylines, titles } from './MapData';
 import Modal from '../modal/Modal';
-import { divIcon, polyline} from 'leaflet';
+import { divIcon, marker, polyline} from 'leaflet';
 import {antPath} from "leaflet-ant-path";
 import { useEffect } from 'react/cjs/react.development';
 import { fetchObjects } from '../../http/reservoirApp';
@@ -23,6 +23,7 @@ const MapComponent = ({textVisible, setTextVisible, props, location, setLocation
   const mapRef = useRef()
   const [markers, setMarkers]=useState()
   const [width] = useState(window.screen.width)
+  const defauleLocation ={lat: 43.3354668644145,lng: 69.24204143081492}
 
   useEffect(()=>{
     if(window.screen.width <= 640 && zoom !== 7){
@@ -100,7 +101,7 @@ const MapComponent = ({textVisible, setTextVisible, props, location, setLocation
       />
       {loading ?
       markers.map(marker => 
-        <Marker key={marker.id} position={marker.location ? marker.location : center} icon={marker.type.id === 1 ? blueIcon : marker.type.id === 2 ? greenIcon : orangeIcon} title={marker.name} eventHandlers={{click:()=>{
+        <Marker key={marker.id} position={marker.location ? marker.location : defauleLocation} icon={marker.type.id === 1 ? blueIcon : marker.type.id === 2 ? greenIcon : orangeIcon} title={marker.name} eventHandlers={{click:()=>{
           setIdItem(marker.id); 
           setActive(true);
           handleOnFlyTo(marker.location);
