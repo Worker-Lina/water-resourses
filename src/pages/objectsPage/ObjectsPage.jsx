@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import Loading from '../../components/loading/Loading'
 import MyButton from '../../components/myButton/MyButton'
@@ -13,11 +14,12 @@ const ObjectsPage = () => {
     const [totalPages, setTotalPages] = useState()
     const [currentPage, setCurrentPage] = useState(1)
     const [loading, setLoading] = useState(false)
+    const [ t, i18n ] = useTranslation();
 
     useEffect(()=>{
         fetchObjectsByAuth(currentPage).then(data => {setObjects(data.content.items); setTotalPages(data.content.total_pages); 
             setCurrentPage(data.content.current_page); setLoading(true)})
-    }, [currentPage])
+    }, [currentPage, i18n.language ])
 
 
   return (

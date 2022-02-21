@@ -25,6 +25,9 @@ const ImgUpload = ({text, image, setImage}) => {
       if(files[0].size >= 5242880){
           return
       }
+      if(files[0].type !== "image/jpeg" && files[0].type !== "image/png"){
+        return
+      }
       setImage(files[0])
       var reader = new FileReader();
       reader.onload = function (e) {

@@ -1,6 +1,7 @@
 .userCreatePage{
     padding: 110px 10% 30px;
     background-color:#eeeeee;
+    min-height: calc(100vh - 70px);
 }
 .userCreatePage .page__subtitle{
     margin-left: 10px;

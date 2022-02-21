@@ -1,6 +1,7 @@
 .users__page{
     padding: 110px 10% 30px;
     background-color: #eeeeee;
+    min-height: calc(100vh - 70px);
 }
 .users__page__icon{
     font-size: 22px;

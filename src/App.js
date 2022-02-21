@@ -13,6 +13,8 @@ import CreateObject from './pages/createObject/CreateObject';
 import ObjectsPage from './pages/objectsPage/ObjectsPage';
 import MainPage from './pages/mainPage/MainPage';
 import Loading from './components/loading/Loading';
+import UserCreatePage from './pages/userCreatePage/UserCreatePage';
+import { is } from '@babel/types';
 
 const App = observer(() => {
   const [ t, i18n ] = useTranslation();
@@ -20,11 +22,14 @@ const App = observer(() => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-      check().then(data => {
-        console.log(data)
+    if(localStorage.getItem('token') !== null){
+        check().then(data => {
           user.setUser(true)
           user.setIsAuth(true)
       }).finally(() => setLoading(false))
+    }else{
+      setLoading(false)
+    }
   }, [])
 
   if (loading) {

@@ -161,16 +161,19 @@ const CreateObject = () => {
 
     async function ondropHandler(e){
         e.preventDefault();
-        if (images.length >=5) { return } // если изоб-ий больше 5 прервать
+        if (images.length >=5) { return }
         let files = [...e.dataTransfer.files]
-        if(files[0].size >= 5242880){ return } // если размер больше 5 мб прервать
+        files = files.filter(file => (file.type === "image/jpeg" || file.type === "image/png") && file.size < 5242880)
+        files.splice(5-images.length)
         setFilesSend([...filesSend, files[0]])
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            let img = {id:genUUID(), url:e.target.result, type:files[0].type, name: files[0].name}
-            setImages([...images, img] )
-        }        
-        reader.readAsDataURL(files[0]);
+        for(let i=0;i<files.length;i++){
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                let img = {id:genUUID(), url:e.target.result, type:files[i].type, name: files[i].name}
+                setImages(prevImages => [...prevImages, img])
+            }        
+            reader.readAsDataURL(files[i]);
+        }
     }
 
     function validateFormData(){
@@ -311,10 +314,9 @@ const CreateObject = () => {
             formData.append(`project_draft_en[0][type]`, project_draft_en.type)
             formData.append(`project_draft_en[0][name]`, project_draft_en.name)
         }
-        console.log("success")
-
         if(id){
-            updateObject(123, formData).then(data => {console.log(data); setActive(true); setSuccess(true)});
+            updateObject(id, formData).then(data => {console.log(data); setActive(true); setSuccess(true)});
+            
         }else{
             createObject(formData).then(data=>{console.log("data ", data); setActive(true); setSuccess(true)}); 
         }   
@@ -339,11 +341,19 @@ const CreateObject = () => {
             <div className="object__page__selections">
                 <div className="page__select_parent">
                     <div className="label">Тип объекта *</div>
-                    <div className={isCorrectType ? "object__page_select" : "object__page_select select-error"}>
+                    <div className={isCorrectType ? "object__page_select" : "object__page_select select-error"} 
+                    onClick={(e)=>{setFirstSelectActive(!firstSelectActive); e.stopPropagation();
+                        document.body.addEventListener('click', function(){
+                            setFirstSelectActive(false)}
+                        );
+                        document.body.removeEventListener('click', function(){
+                            setFirstSelectActive(false)}
+                        )
+                        }}>
                         <p className="select__value">{type.name}</p>
                         {type ? <span className="select-cross" onClick={()=>{setType('')}}>&#10006;</span>: ""}
                         <span className="select-line"></span>
-                        <div onClick={()=>setFirstSelectActive(!firstSelectActive)} className={firstSelectActive ? "select-icon select-icon-active": "select-icon"}></div>
+                        <div className={firstSelectActive ? "select-icon select-icon-active": "select-icon"}></div>
                     </div>
                     {objectsTypes ? <MySelect active={firstSelectActive} setActive={setFirstSelectActive} options={objectsTypes} 
                     setSelectedItem={setType}></MySelect> : <></>}
@@ -351,11 +361,20 @@ const CreateObject = () => {
                 </div>
                 <div className="page__select_parent">
                     <div className="label">Статус объекта *</div>
-                    <div className={isCorrectStatus ? "object__page_select" : "object__page_select select-error"}>
+                    <div className={isCorrectStatus ? "object__page_select" : "object__page_select select-error"} 
+                    onClick={(e)=>{setSecondSelectActive(!secondSelectActive);
+                        e.stopPropagation();
+                        document.body.addEventListener('click', function(){
+                            setSecondSelectActive(false)}
+                        );
+                        document.body.removeEventListener('click', function(){
+                            setSecondSelectActive(false)}
+                        )
+                        }}>
                         <p className="select__value">{status.name}</p>
                         {status ? <span onClick={()=>{setStatus('');}} className="select-cross">&#10006;</span> : ""}
                         <span className="select-line"></span>
-                        <div onClick={()=>setSecondSelectActive(!secondSelectActive)} className={secondSelectActive ? "select-icon select-icon-active": "select-icon"} ></div>
+                        <div className={secondSelectActive ? "select-icon select-icon-active": "select-icon"} ></div>
                     </div>
                     {objectsStatus ? <MySelect active={secondSelectActive} setActive={setSecondSelectActive} options={objectsStatus} 
                     setSelectedItem={setStatus}></MySelect> :<></>}
@@ -367,7 +386,7 @@ const CreateObject = () => {
             <label htmlFor="happy">Магистральный</label></> :<></>}
 
             <div className="label">Местоположение *</div>
-            <MapComponent location={location} setLocation={setLocation}/>
+            <MapComponent location={location} setLocation={setLocation} fullScreenButton={false}/>
             {isCorrectLocation ? <></> : <div className="label error-label">Вы не выбрали Местоположение</div>}
 
             <div className="label">{type.id === 2 || type.id ===3 ? "Водоотдача":"Объем" } (м<sup><small>3</small></sup>) *</div>
@@ -435,7 +454,7 @@ const CreateObject = () => {
             </div>
             <div className="line"></div>
             <div className="page__buttons">
-                <MyButton variant="border red" type="button">Отмена</MyButton>
+                <Link to={OBJECTS_ROUTE}><MyButton variant="border red" type="button">Отмена</MyButton></Link>
                 <MyButton variant="green" onClick={sendFormData} type="button">Сохранить</MyButton>
             </div>
         </div>

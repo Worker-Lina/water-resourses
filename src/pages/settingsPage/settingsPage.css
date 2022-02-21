@@ -2,6 +2,7 @@
     width: 100%;
     background: #eeeeee;
     padding: 110px 10% 30px;
+    min-height: calc(100vh - 70px);
 }
 .setting__page__item{
     display: flex;

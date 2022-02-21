@@ -41,8 +41,6 @@ const ItemPage = () => {
     return slides
   }
 
-  
-
 
   return <div className="item__page">
     {loading ? <>

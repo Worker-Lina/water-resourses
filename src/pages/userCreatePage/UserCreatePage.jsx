@@ -40,11 +40,11 @@ const UserCreatePage = () => {
         }
         setIsCorrectEmail(true)
         if(id){
-            updateUser(id, fullName, email).then(data => {setEmail(''); setFullName('');
+            updateUser(id, fullName, email).then(data => {setSuccess(true);
             setSuccessRequest(true); setActive(true) })
         }else{
             createUser(fullName, email).then(data=>{console.log(data); setSuccess(true); setUserId(data.content.id);
-            setSuccessRequest(true); setActive(true)});
+            setSuccessRequest(true); setActive(true); setFullName(''); setEmail('')});
         }
     }
 
@@ -57,7 +57,7 @@ const UserCreatePage = () => {
         {active ? <ResponseRequets active={active} setActive={setActive} success={successRequest}/> : <></>}
         <div className="page__item">
             <Link to={USERS_ROUTE}><MyButton variant="blue"><span className="button__left"> </span>Назад</MyButton></Link>
-            <div className="page__subtitle">Создание пользователя</div>
+            <div className="page__subtitle">{id ? "Редактирование " : "Создание " }пользователя</div>
         </div>
         <div className="page__form">
             <div className="label">ФИО *</div>
@@ -69,7 +69,7 @@ const UserCreatePage = () => {
             {visible ? <div className="userCreatePage__newPassword">Новый пароль: {password}</div> : <></>}
             <div className="line"></div>
             <div className="page__buttons">
-                <MyButton variant="border red">Отмена</MyButton>
+                <Link to={USERS_ROUTE}><MyButton variant="border red">Отмена</MyButton></Link>
                 {success ? <MyButton variant="orange" onClick={resetMyPassword}>Сбросить пароль</MyButton> :<></>}
                 <MyButton variant="green" onClick={userCreate}>Сохранить</MyButton>
             </div>
