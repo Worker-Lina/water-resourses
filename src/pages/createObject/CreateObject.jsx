@@ -313,11 +313,11 @@ const CreateObject = () => {
         }
         console.log("success")
 
-        /*if(id){
+        if(id){
             updateObject(123, formData).then(data => {console.log(data); setActive(true); setSuccess(true)});
         }else{
             createObject(formData).then(data=>{console.log("data ", data); setActive(true); setSuccess(true)}); 
-        }  */ 
+        }   
       }
 
   return (
