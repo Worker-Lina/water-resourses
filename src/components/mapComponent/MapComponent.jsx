@@ -101,7 +101,7 @@ const MapComponent = ({textVisible, setTextVisible, props, location, setLocation
       />
       {loading ?
       markers.map(marker => 
-        <Marker key={marker.id} position={marker.location ? marker.location : marker.location[0] ? defauleLocation : defauleLocation} icon={marker.type.id === 1 ? blueIcon : marker.type.id === 2 ? greenIcon : orangeIcon} title={marker.name} eventHandlers={{click:()=>{
+        <Marker key={marker.id} position={marker.location ? marker.location : defauleLocation} icon={marker.type.id === 1 ? blueIcon : marker.type.id === 2 ? greenIcon : orangeIcon} title={marker.name} eventHandlers={{click:()=>{
           setIdItem(marker.id); 
           setActive(true);
           handleOnFlyTo(marker.location);
