@@ -14,10 +14,17 @@ const SettingsPage = () => {
     const [password, setPassword] = useState('')
     const [confirmedPassword, setConfirmedPassword] = useState('')
     const [isCorrectEmail, setIsCorrectEmail] = useState(true)
+    const [isCorrectPassword, setIsCorrectPassword] = useState(true)
+    const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(true)
 
     function emailValidation(value) {
         let txt = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return txt.test(value);
+    }
+
+    function passwordValidate(value){
+        var re = /[a-z]\d|\d[a-z]/i;
+        return re.test(value) && value.length > 4;
     }
 
     const updateMyProfile = async () =>{
@@ -36,17 +43,23 @@ const SettingsPage = () => {
 
 
     const updateMyPassword = async () =>{
-        if(emailValidation(email)){
-            setIsCorrectEmail(false)
+        if(!passwordValidate(password)){
+            setIsCorrectPassword(false)
             return
         }
-        try{
+        setIsCorrectEmail(true)
+        if(password !== confirmedPassword){
+            setIsPasswordConfirmed(false)
+            return
+        }
+        setIsPasswordConfirmed(true)
+        /*try{
             updatePassword(password, confirmedPassword).then(data=>{console.log(data); setPassword(''); setConfirmedPassword('');
             setSuccess(true); setActive(true)})
         }catch(e){
             setSuccess(false); setActive(true)
             console.log(e)
-        }
+        }*/
     }
 
   return (
@@ -72,9 +85,11 @@ const SettingsPage = () => {
         <div className="page__form">
             <p className="setting__page__subtitle">Изменение пароля</p>
             <div className="label">Новый пароль *</div>
-            <input className="input" type="password" placeholder="новый пароль" value={password} onChange={e=>setPassword(e.target.value)}></input>
+            <input className={isCorrectPassword ? "input" : "input input-error"} type="password" placeholder="новый пароль" value={password} onChange={e=>setPassword(e.target.value)}></input>
+            {isCorrectPassword ? <></> : <div className="label error-label">Введен некорректный Пароль</div>}
             <div className="label">Подтверждение пароля *</div>
-            <input className="input" type="password" placeholder="подтвердите пароль" value={confirmedPassword} onChange={e=>setConfirmedPassword(e.target.value)}></input>
+            <input className={isPasswordConfirmed ? "input" : "input input-error"} type="password" placeholder="подтвердите пароль" value={confirmedPassword} onChange={e=>setConfirmedPassword(e.target.value)}></input>
+            {isPasswordConfirmed ? <></> : <div className="label error-label">Пароли не совпадают</div>}
             <div className="line"></div>
             <div className="page__buttons">
                 <MyButton variant="green" onClick={updateMyPassword}>Изменить пароль</MyButton>
