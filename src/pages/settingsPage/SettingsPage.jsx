@@ -39,9 +39,10 @@ const SettingsPage = () => {
         }
         setIsCorrectEmail(true)
         try{
-            updateProfile(fullName, email).then(data=>{setSuccess(true); setActive(true)})
+            setLoading(true);
+            updateProfile(fullName, email).then(data=>{setSuccess(true); setActive(true); setLoading(false);})
         }catch(e){
-            setSuccess(false); setActive(true)
+            setSuccess(false); setActive(true); setLoading(false)
             console.log(e)
         }
     }
