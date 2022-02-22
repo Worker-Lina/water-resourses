@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 import { useEffect, useState } from 'react/cjs/react.development'
 import Loading from '../../components/loading/Loading'
 import MyButton from '../../components/myButton/MyButton'
@@ -9,6 +9,7 @@ import { emailValidation, passwordValidate, nameValidate } from '../../utils/val
 import "./settingsPage.css"
 
 const SettingsPage = () => {
+    const navigate = useNavigate();
     const [active, setActive]=useState(false)
     const [success, setSuccess] = useState(false)
     const [fullName, setFullName] = useState('')
@@ -70,7 +71,7 @@ const SettingsPage = () => {
         {loading ? <Loading/> : <></>}
         {active ? <ResponseRequets success={success} active={active} setActive={setActive}></ResponseRequets> : <></>}
         <div className="page__item">
-            <Link to={"/"}><MyButton variant="blue"> <span className="button__left"></span> Назад</MyButton></Link>
+            <MyButton variant="blue" onClick={() => navigate(-1)}> <span className="button__left"></span> Назад</MyButton>
             <div className="page__subtitle">Настройки</div>
         </div>
         <div className="page__form">
@@ -83,7 +84,7 @@ const SettingsPage = () => {
             {isCorrectEmail ? <></> : <div className="label error-label">Введен некорректный E-mail</div>}
             <div className="line"></div>
             <div className="page__buttons">
-                <MyButton variant="border red">Отмена</MyButton>
+                <MyButton variant="border red" onClick={() => navigate(-1)}>Отмена</MyButton>
                 <MyButton variant="green" onClick={updateMyProfile}>Сохранить</MyButton>
             </div>
         </div>

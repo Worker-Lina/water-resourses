@@ -21,7 +21,7 @@ const MainPage = () => {
             <p className="title">О проекте</p>
             <p className="subtitle">Vitae nec sed proin lorem eget. Nec porta consectetur vulputate arcu. Sit in malesuada integer cursus iaculis eget malesuada a. Euismod aliquet morbi tortor, mi. Adipiscing tortor, ornare lectus sit in consequat vitae, malesuada.</p>
         </div>  
-        <MapComponent textVisible={textVisible} setTextVisible={setTextVisible}></MapComponent>
+        <MapComponent textVisible={textVisible} setTextVisible={setTextVisible} fullScreenButton={true}></MapComponent>
         <div className="mainPage-btn">
         <MyButton variant = "orange" onMouseEnter={()=>{}}><Link to="/report"> {t("button")}</Link>
           <svg className="modal-svg" width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
