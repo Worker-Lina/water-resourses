@@ -181,6 +181,23 @@ const CreateObject = () => {
         }
     }
 
+    async function onAddImage(e){
+        console.log("onaddimage")
+        if (images.length >=5) { return }
+        let files = [...e.target.files]
+        files = files.filter(file => (file.type === "image/jpeg" || file.type === "image/png") && file.size < 5242880)
+        files.splice(5-images.length)
+        setFilesSend([...filesSend, files[0]])
+        for(let i=0;i<files.length;i++){
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                let img = {id:genUUID(), url:e.target.result, type:files[i].type, name: files[i].name}
+                setImages(prevImages => [...prevImages, img])
+            }        
+            reader.readAsDataURL(files[i]);
+        }
+    }
+
     function validateFormData(){
         !name_ru ? setIsCorrectName_ru(false) : setIsCorrectName_ru(true)
         !location ? setIsCorrectLocation(false) : setIsCorrectLocation(true)
@@ -422,6 +439,7 @@ const CreateObject = () => {
                 <p>
                     .jpg, .png <br/> Не более 5МБ
                 </p>
+                <input className="input__upload" type="file" multiple="multiple" accept=".jpg,.jpeg,.png" onChange={(e)=>onAddImage(e)}></input>
             </div>
             {images.length ? images.map(img =>
                 <ImgCart key={genUUID()} images={images} setImages={setImages} image={img}/>
