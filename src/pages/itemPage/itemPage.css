@@ -1,5 +1,6 @@
 .item__page{
     padding: 130px 10% 70px;
+    min-height: calc(100vh - 70px);
 }
 .item__page .slider__nav{
     z-index: 0;
