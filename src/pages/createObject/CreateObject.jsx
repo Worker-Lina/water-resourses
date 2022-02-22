@@ -311,17 +311,17 @@ const CreateObject = () => {
         }
 
         if(project_draft_kk){
-            if(project_draft_kk.id){
-                let projectKkFormData = new FormData()
-                projectKkFormData.append('file', project_draft_kk)
-                let data = await uploadImage(projectKkFormData);
-                formData.append(`project_draft_kk[0][url]`, data.content.value)
-            }
-            else{
+            if(project_draft_kk.url){
                 formData.append(`project_draft_kk[0][url]`, project_draft_kk.url)
+            }else{
+                let projectRuFormData = new FormData()
+                projectRuFormData.append('file', project_draft_kk)
+                let data = await uploadImage(projectRuFormData);
+                formData.append(`project_draft_kk[0][url]`, data.content.value)
+                console.log(data)
             }
             formData.append(`project_draft_kk[0][type]`, project_draft_kk.type)
-            formData.append(`project_draft_kk[0][name]`, project_draft_kk.name)  
+            formData.append(`project_draft_kk[0][name]`, project_draft_kk.name)    
         }
 
         if(project_draft_en){
