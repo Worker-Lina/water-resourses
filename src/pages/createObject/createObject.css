@@ -175,3 +175,10 @@
   .select-error{
       background: rgb(240, 164, 164, .4);
   }
+
+  @media(max-width:1600px){
+    .draft__photo{
+        display: flex;
+        flex-direction: column;
+    }
+}
