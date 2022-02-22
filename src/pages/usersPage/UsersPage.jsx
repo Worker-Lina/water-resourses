@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Loading from '../../components/loading/Loading'
 import MyButton from '../../components/myButton/MyButton'
 import Pagination from '../../components/pagination/Pagination'
+import ResponseRequets from '../../components/responseRequest/ResponseRequets'
 import UserItem from '../../components/userItem/UserItem'
 import { fetchUsers } from '../../http/reservoirApp'
 import { USER_CREATE_ROUTE } from '../../utils/consts'
@@ -12,6 +13,8 @@ const UsersPage = () => {
     const [users, setUsers] = useState([])
     const [totalPages, setTotalPages] = useState()
     const [currentPage, setCurrentPage] = useState(1)
+    const [responseActive, setResponseActive] = useState(false)
+    const [success, setSuccess] = useState(false)
 
     useEffect(()=>{
         fetchUsers(currentPage).then(data => {setUsers(data.content.items); setTotalPages(data.content.total_pages); 
@@ -20,6 +23,7 @@ const UsersPage = () => {
 
   return (
     <div className="users__page">
+        {responseActive ? <ResponseRequets active={responseActive} setActive={setResponseActive} success={success}/> : <></>}
         <div className="page__item">
             <div className="page__subtitle">Пользователи</div>
             <Link to={USER_CREATE_ROUTE}> <MyButton variant="green"> <span className="users__page__icon">+</span> Добавить</MyButton> </Link>
@@ -33,7 +37,7 @@ const UsersPage = () => {
             </div>
             <div className="line"></div>
             {users.length ? users.map(user =>
-                <UserItem key={user.id} item={user} users={users} setUsers={setUsers}></UserItem>
+                <UserItem key={user.id} item={user} users={users} setUsers={setUsers} setSuccess={setSuccess} setResponseActive = {setResponseActive}></UserItem>
             ) : <Loading></Loading>} 
             <Pagination totalPages={totalPages} page={currentPage} changePage={setCurrentPage}></Pagination>
             

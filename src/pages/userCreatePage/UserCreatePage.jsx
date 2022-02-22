@@ -8,6 +8,7 @@ import "./userCreatePage.css"
 import { useParams } from 'react-router';
 import ResponseRequets from '../../components/responseRequest/ResponseRequets'
 import { emailValidation, nameValidate } from '../../utils/validate'
+import Loading from '../../components/loading/Loading'
 
 const UserCreatePage = () => {
     const {id} = useParams()
@@ -21,10 +22,13 @@ const UserCreatePage = () => {
     const [successRequest, setSuccessRequest] = useState(false) 
     const [isCorrectEmail, setIsCorrectEmail] = useState(true)
     const [isCorrectFullName, setIsCorrectFullName] = useState(true)
+    const [preLoader, setPreLoader] = useState(false)
 
     useEffect(()=>{
         if(id){
-            fecthOneUser(id).then(data => {console.log(data); setEmail(data.content.email); setFullName(data.content.name); setUserId(data.content.id)})
+            setPreLoader(true)
+            fecthOneUser(id).then(data => {console.log(data); setEmail(data.content.email); setFullName(data.content.name); setUserId(data.content.id);
+            setPreLoader(false)})
         }
     },[id])
 
@@ -40,20 +44,25 @@ const UserCreatePage = () => {
         }
         setIsCorrectEmail(true)
         if(id){
+            setPreLoader(true);
             updateUser(id, fullName, email).then(data => {setSuccess(true);
-            setSuccessRequest(true); setActive(true) })
+            setSuccessRequest(true); setActive(true); setPreLoader(false) })
         }else{
+            setPreLoader(true);
             createUser(fullName, email).then(data=>{console.log(data); setSuccess(true); setUserId(data.content.id);
-            setSuccessRequest(true); setActive(true); setFullName(''); setEmail('')});
+            setSuccessRequest(true); setActive(true); setPreLoader(false)});
         }
     }
 
     const resetMyPassword = async () =>{
-        resetPassword(userId).then(data => {console.log(data); setPassword(data.content.password); setVisible(true)})
+        setPreLoader(true)
+        resetPassword(userId).then(data => {console.log(data); setPassword(data.content.password); setVisible(true);
+        setPreLoader(false)})
     }
 
   return (
     <div className="userCreatePage">
+        {preLoader ? <Loading/> : <></>}
         {active ? <ResponseRequets active={active} setActive={setActive} success={successRequest}/> : <></>}
         <div className="page__item">
             <Link to={USERS_ROUTE}><MyButton variant="blue"><span className="button__left"> </span>Назад</MyButton></Link>

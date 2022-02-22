@@ -11,6 +11,7 @@ import ImgUpload from '../../components/createObjectsComponents/ImgUpload'
 import { createObject, fetchObjectsStatus, fetchObjectsTypes, fetchOneObjectByAdmin, updateObject, uploadImage } from '../../http/reservoirApp'
 import { useParams } from 'react-router';
 import ResponseRequets from '../../components/responseRequest/ResponseRequets'
+import Loading from '../../components/loading/Loading'
 
 const CreateObject = () => {
     const {id} = useParams()
@@ -90,6 +91,8 @@ const CreateObject = () => {
     const [isCorrectType, setIsCorrectType]= useState(true)
     const [isCorrectStatus, setIsCorrectStatus]= useState(true)
 
+    const [preLoader, setPreLoader] = useState(false)
+
     useEffect(()=>{
         fetchObjectsTypes().then(data => setObjectsTypes(data.content[0]));
         fetchObjectsStatus().then(data => setObjectsStatus(data.content[0]))
@@ -97,6 +100,7 @@ const CreateObject = () => {
 
     useEffect(()=>{
         if(id){
+            setPreLoader(true)
             fetchOneObjectByAdmin(id).then(data=>{
                 data.content.name_ru && setName_ru(data.content.name_ru)
                 data.content.name_kk && setName_kk(data.content.name_kk)
@@ -145,6 +149,7 @@ const CreateObject = () => {
                 data.content.project_draft_ru && setProject_draft_ru(data.content.project_draft_ru[0])
                 data.content.project_draft_kk && setProject_draft_kk(data.content.project_draft_kk[0])
                 data.content.project_draft_en && setProject_draft_en(data.content.project_draft_en[0])
+                setPreLoader(false)
             })
         }
     },[id])   
@@ -315,15 +320,29 @@ const CreateObject = () => {
             formData.append(`project_draft_en[0][name]`, project_draft_en.name)
         }
         if(id){
-            updateObject(id, formData).then(data => {console.log(data); setActive(true); setSuccess(true)});
-            
+            try{
+                setPreLoader(true);
+                updateObject(id, formData).then(data => {console.log(data); setActive(true); setSuccess(true); setPreLoader(false)});
+            }catch(e){
+                setPreLoader(false)
+                console.log(e);
+                setSuccess(false)
+            }
         }else{
-            createObject(formData).then(data=>{console.log("data ", data); setActive(true); setSuccess(true)}); 
+            try{
+                setPreLoader(true);
+                createObject(formData).then(data=>{console.log("data ", data); setActive(true); setSuccess(true); setPreLoader(false)}); 
+            }catch(e){
+                setPreLoader(false)
+                console.log(e);
+                setSuccess(false)
+            }
         }   
       }
 
   return (
     <div className="create__object__page">
+        {preLoader ? <Loading/> : <></>}
         {active ? <ResponseRequets success={success} setActive={setActive} /> : <></>}
         <div className="page__item">
             <Link to={OBJECTS_ROUTE}><MyButton variant="blue"><span className="button__left"> </span>Назад</MyButton></Link>

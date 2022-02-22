@@ -1,19 +1,24 @@
 import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import { deleteObject } from '../../http/reservoirApp'
-import { CREATE_OBJECT_ROUTE } from '../../utils/consts'
-import DeletionConfirm from '../deletionСonfirmation/DeletionConfirm'
+import Loading from '../loading/Loading'
 import MyButton from '../myButton/MyButton'
 import "./objectItem.css"
 
-const ObjectItem = ({item, objects, setObjects}) => {
+const ObjectItem = ({item, objects, setObjects, setSuccess, setResponseActive}) => {
     const [active, setActive] = useState(false)
-    const [agreement, setAgreement] = useState(false)
+    const [preLoader, setPreLoader] = useState(false)
 
-    if(agreement){
-        deleteObject(item.id).then(data=>{console.log(data); setAgreement(false); setObjects(objects.filter(ob => ob.id !== item.id))})
+    const deleteItem = async () =>{
+        setActive(false)
+        setPreLoader(true);
+        deleteObject(item.id).then(data=>{console.log(data); setObjects(objects.filter(ob => ob.id !== item.id));
+            setResponseActive(true);
+            setSuccess(true);})
     }
+
   return (<>
+      {preLoader ? <Loading/> : <></>}
     <div className="user__item">
         <p className="user__item__text">{item.id}</p>
         <p className="user__item__text">{item.name}</p>
@@ -32,7 +37,18 @@ const ObjectItem = ({item, objects, setObjects}) => {
     </div>
     <div className="line"></div>
     {active ? 
-        <DeletionConfirm setActive={setActive} setAgreement={setAgreement}></DeletionConfirm>
+        <div className="deletion__modal" onClick={()=>setActive(false)}>
+            <div className="deletion__modal__content" onClick={(e)=>e.stopPropagation()}>
+                <div className="response__close" onClick={()=>setActive(false)}>
+                    <span className="close__icon">&#10006;</span>
+                </div>
+                <p>Вы уверены, что хотите удалить выбранную запись?</p>
+                <div className="page__buttons">
+                    <MyButton variant="green" onClick={deleteItem}>Да</MyButton>
+                    <MyButton variant="blue" onClick={()=>setActive(false)}>Нет</MyButton>
+                </div>
+            </div>
+        </div>
     : <></>}
     </>
   )

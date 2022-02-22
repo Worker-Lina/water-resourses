@@ -11,7 +11,7 @@
     top: 35%;
     border: 2px dashed black;
     animation: rotate 1s infinite linear;
-
+    z-index: 100;
 }
 
 @keyframes rotate{

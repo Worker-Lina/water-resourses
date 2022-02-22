@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react/cjs/react.development'
+import Loading from '../../components/loading/Loading'
 import MyButton from '../../components/myButton/MyButton'
 import ResponseRequets from '../../components/responseRequest/ResponseRequets'
 import { check, updatePassword, updateProfile, updateUser } from '../../http/userApi'
@@ -18,10 +19,11 @@ const SettingsPage = () => {
     const [isCorrectEmail, setIsCorrectEmail] = useState(true)
     const [isCorrectPassword, setIsCorrectPassword] = useState(true)
     const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(true)
-
+    const [loading, setLoading]  =useState(false)
 
     useEffect(()=>{
-        check().then(data=> {setEmail(data.content.email); setFullName(data.content.name);})
+        setLoading(true);
+        check().then(data=> {setEmail(data.content.email); setFullName(data.content.name); setLoading(false)})
     }, [])
 
     const updateMyProfile = async () =>{
@@ -65,6 +67,7 @@ const SettingsPage = () => {
 
   return (
     <div className="setting__page">
+        {loading ? <Loading/> : <></>}
         {active ? <ResponseRequets success={success} active={active} setActive={setActive}></ResponseRequets> : <></>}
         <div className="page__item">
             <Link to={"/"}><MyButton variant="blue"> <span className="button__left"></span> Назад</MyButton></Link>
