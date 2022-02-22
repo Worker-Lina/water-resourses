@@ -50,6 +50,7 @@ const NavBar = observer(() => {
     }
     
   return (<>
+        
         <div id="topNav" className="navbar">
           <div className="navbar__right">
                 <div className="navbar__menu-div" onClick={()=>{setActive(!active)}}>

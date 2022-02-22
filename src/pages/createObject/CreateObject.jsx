@@ -193,6 +193,7 @@ const CreateObject = () => {
     }
 
     async function sendFormData(){
+        setPreLoader(true);
         if(!validateFormData()){
             return
         }
@@ -321,7 +322,6 @@ const CreateObject = () => {
         }
         if(id){
             try{
-                setPreLoader(true);
                 updateObject(id, formData).then(data => {console.log(data); setActive(true); setSuccess(true); setPreLoader(false)});
             }catch(e){
                 setPreLoader(false)
@@ -330,7 +330,6 @@ const CreateObject = () => {
             }
         }else{
             try{
-                setPreLoader(true);
                 createObject(formData).then(data=>{console.log("data ", data); setActive(true); setSuccess(true); setPreLoader(false)}); 
             }catch(e){
                 setPreLoader(false)
