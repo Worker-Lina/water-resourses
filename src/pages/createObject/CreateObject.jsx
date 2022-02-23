@@ -19,12 +19,14 @@ const CreateObject = () => {
     const {id} = useParams()
     const [type, setType] = useState('')
     const [status, setStatus] = useState('')
+    const [length, setLength] = useState('')
     const [images, setImages] = useState([])
     const [active, setActive]= useState(false)
     const [success, setSuccess]= useState(false)
     const [filesSend, setFilesSend] = useState([])
     const [location, setLocation] = useState(null)
     const [preLoader, setPreLoader] = useState(false)
+    const [isMagistral, setIsMagistral] = useState(false)
     const [objectsTypes, setObjectsTypes] = useState(null) 
     const [isCorrectType, setIsCorrectType]= useState(true)
     const [isCorrectStatus, setIsCorrectStatus]= useState(true)
@@ -59,7 +61,9 @@ const CreateObject = () => {
                 }
                 setType(data.content.type);
                 setStatus(data.content.status)
+                data.content.isMagistral && setIsMagistral(data.content.isMagistral === 1 ? true : false)
                 data.content.photos && setImages(data.content.photos)
+                data.content.length && setLength(data.content.length)
                 data.content.location && setLocation(data.content.location)
                 data.content.project_draft_ru && setProject_draft_ru(data.content.project_draft_ru[0]);
                 data.content.project_draft_kk && setProject_draft_kk(data.content.project_draft_kk[0]);
@@ -83,15 +87,16 @@ const CreateObject = () => {
                     for(let i=0;i<data[key].length;i++){
                         formData.append(`video[${i}]`, data[key][i]);
                     }
-                }else if(key === "isMagistral"){
-                    formData.append('isMagistral', data[key] ? 1 : 0)
-                }
-                else{
+                }else{
                     data[key] && formData.append(key, data[key]);
                 }
         }
         formData.append('type', type.id);
         formData.append('status', status.id);
+        if(type.id === 2 || type.id === 3){
+            length && formData.append("length", length);
+            formData.append("isMagistral", isMagistral ? 1 : 0);
+        }
         if(location){
             formData.append(`location[lat]`, location.lat);
             formData.append(`location[lng]`, location.lng);
@@ -259,7 +264,7 @@ const CreateObject = () => {
                         </div>
                     </div>
 
-                    {type.id === 2 || type.id === 3 ? <> <input type="checkbox" {...register("isMagistral")} className="custom-checkbox" id="happy"/>
+                    {type.id === 2 || type.id === 3 ? <> <input type="checkbox" checked={isMagistral} onChange={()=>setIsMagistral(!isMagistral)} className="custom-checkbox" id="happy"/>
                     <label htmlFor="happy">Магистральный</label></> :<></>}
 
                     <div className="label">Местоположение *</div>
@@ -271,7 +276,7 @@ const CreateObject = () => {
 
                     {type.id === 2 || type.id === 3 ? <>
                         <div className="label">Протяженность (км)</div>
-                        <input type="text" {...register("length")} className="input"/> </>: <></>}
+                        <input type="text" value={length} onChange={(e)=>setLength(e.target.value)} className="input"/> </>: <></>}
 
                     <div className="label">Фотографии *</div>
                     <div className="img__upload"

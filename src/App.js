@@ -38,6 +38,8 @@ const App = observer(() => {
       return <Loading />
   }
 
+  localStorage.getItem('token')
+
   return (
     <BrowserRouter >
       <Helmet>
