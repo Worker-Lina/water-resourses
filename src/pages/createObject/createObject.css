@@ -32,6 +32,9 @@
     border-left: 2px solid #959595;
     transform: rotate(-45deg);
 }
+.select__value{
+    font-size: 14px;
+}
 .select-icon-active{
     transform: rotate(135deg);
     position: relative;
@@ -63,6 +66,7 @@
     padding: 5px 25px;
     border-bottom: 1px solid #aeaeaf8c;
     border-radius: 4px;
+    font-size: 14px;
 }
 .select-option-text:hover{
     background-color: #5584AC;

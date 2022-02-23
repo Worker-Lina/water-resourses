@@ -83,7 +83,10 @@ const CreateObject = () => {
                     for(let i=0;i<data[key].length;i++){
                         formData.append(`video[${i}]`, data[key][i]);
                     }
-                }else{
+                }else if(key === "isMagistral"){
+                    formData.append('isMagistral', data[key] ? 1 : 0)
+                }
+                else{
                     data[key] && formData.append(key, data[key]);
                 }
         }
@@ -203,6 +206,7 @@ const CreateObject = () => {
         }
     }
 
+
     return (
         <div className="create__object__page">
             <Helmet>
@@ -245,7 +249,7 @@ const CreateObject = () => {
                             <div className="label">Статус объекта *</div>
                             <div className={isCorrectStatus ? "object__page-select" : "object__page-select select-error"}  onClick={e=>selectClick(e, setStatusSelectActive, statusSelectActive)}>
                                 <p className="select__value">{status.name}</p>
-                                {type ? <span className="select-cross" onClick={()=>{setStatus('')}}>&#10006;</span>: ""}
+                                {status ? <span className="select-cross" onClick={()=>{setStatus('')}}>&#10006;</span>: ""}
                                 <span className="select-line"></span>
                                 <div className={statusSelectActive ? "select-icon select-icon-active": "select-icon"}></div>
                             </div>
@@ -255,15 +259,19 @@ const CreateObject = () => {
                         </div>
                     </div>
 
-                    {type.id === 3 || type.id === 4 ? <> <input type="checkbox" {...register("isMagistral")} className="custom-checkbox" id="happy"/>
+                    {type.id === 2 || type.id === 3 ? <> <input type="checkbox" {...register("isMagistral")} className="custom-checkbox" id="happy"/>
                     <label htmlFor="happy">Магистральный</label></> :<></>}
 
                     <div className="label">Местоположение *</div>
                     <MapComponent location={location} setLocation={setLocation} fullScreenButton={false}/>
                     {isCorrectLocation ? <></> : <div className="label error-label">Вы не выбрали Местоположение</div>}
             
-                    <div className="label">Объем (м<sup><small>3</small></sup>) *</div>
+                    <div className="label">{type.id === 3 || type.id === 4 ? "Водоотдача" : "Объем" } (м<sup><small>3</small></sup>) *</div>
                     <input className="input" type="text" {...register("volume")}></input>
+
+                    {type.id === 2 || type.id === 3 ? <>
+                        <div className="label">Протяженность (км)</div>
+                        <input type="text" {...register("length")} className="input"/> </>: <></>}
 
                     <div className="label">Фотографии *</div>
                     <div className="img__upload"
