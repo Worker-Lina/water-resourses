@@ -2,6 +2,7 @@
     padding: 110px 10% 30px;
     background-color: #eeeeee;
     min-height: calc(100vh - 70px);
+    position: relative;
 }
 .users__page__icon{
     width: 20px;

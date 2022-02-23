@@ -16,6 +16,7 @@ const UsersPage = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [responseActive, setResponseActive] = useState(false)
     const [success, setSuccess] = useState(false)
+    const [preLoader, setPreLoader] = useState(false)
 
     useEffect(()=>{
         fetchUsers(currentPage).then(data => {setUsers(data.content.items); setTotalPages(data.content.total_pages); 
@@ -27,13 +28,15 @@ const UsersPage = () => {
         <Helmet>
           <title>Пользователи</title>
         </Helmet>
+        {preLoader ? <Loading/> : <></>}
+        {preLoader ? <div className="preLoader"/> : <></>}
         {responseActive ? <ResponseRequets active={responseActive} setActive={setResponseActive} success={success}/> : <></>}
         <div className="page__item">
             <div className="page__subtitle">Пользователи</div>
             <Link to={USER_CREATE_ROUTE}> <MyButton variant="green"> <span className="users__page__icon">+</span> Добавить</MyButton> </Link>
         </div>
         <div className="page__content">
-            <div className="page__content__item">
+            <div className="page__content__item user-item-page">
                 <p className="content__item__text">ID</p>
                 <p className="content__item__text">Название</p>
                 <p className="content__item__text">E-mail</p>
@@ -41,7 +44,9 @@ const UsersPage = () => {
             </div>
             <div className="line"></div>
             {users.length ? users.map(user =>
-                <UserItem key={user.id} item={user} users={users} setUsers={setUsers} setSuccess={setSuccess} setResponseActive = {setResponseActive}></UserItem>
+                <UserItem key={user.id} item={user} users={users}
+                preLoader = {preLoader} setPreLoader = {setPreLoader}
+                setUsers={setUsers} setSuccess={setSuccess} setResponseActive = {setResponseActive}></UserItem>
             ) : <Loading></Loading>} 
             <Pagination totalPages={totalPages} page={currentPage} changePage={setCurrentPage}></Pagination>
             

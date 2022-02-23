@@ -1,6 +1,6 @@
 .user__item{
     display: grid;
-    grid-template-columns: 10% 1fr 1fr 1fr;
+    grid-template-columns: 5% 1fr 1fr 10%;
     align-items: center;
 }
 .user__item__text{

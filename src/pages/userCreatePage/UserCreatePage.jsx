@@ -10,6 +10,7 @@ import ResponseRequets from '../../components/responseRequest/ResponseRequets'
 import { emailValidation, nameValidate } from '../../utils/validate'
 import Loading from '../../components/loading/Loading'
 import Helmet from 'react-helmet'
+import PreLoader from '../../components/loading/PreLoader'
 
 const UserCreatePage = () => {
     const {id} = useParams()
@@ -63,7 +64,6 @@ const UserCreatePage = () => {
 
   return (
     <div className="userCreatePage">
-        {preLoader ? <Loading/> : <></>}
         {active ? <ResponseRequets active={active} setActive={setActive} success={successRequest}/> : <></>}
         <Helmet>
           <title>{id ? "Редактирование " : "Создание " }пользователя</title>
@@ -73,6 +73,7 @@ const UserCreatePage = () => {
             <div className="page__subtitle">{id ? "Редактирование " : "Создание " }пользователя</div>
         </div>
         <div className="page__form">
+            {preLoader ? <PreLoader/> : <></>}
             <div className="label">ФИО *</div>
             <input className={isCorrectFullName ? "input" : "input input-error"} type="text" placeholder="ФИО" value={fullName} onChange={e=>setFullName(e.target.value)}></input>
             {isCorrectFullName ? <></> : <div className="label error-label">Введено некорректное имя</div>}

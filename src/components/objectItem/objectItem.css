@@ -17,3 +17,9 @@
 .pending__planning{
     background-color: #FC997C;
 }
+
+.object__item{
+    display: grid;
+    grid-template-columns: 5% 1fr 1fr 15%;
+    align-items: center;
+}

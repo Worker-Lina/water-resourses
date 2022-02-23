@@ -6,20 +6,19 @@ import Loading from '../loading/Loading'
 import MyButton from '../myButton/MyButton'
 import "./userItem.css"
 
-const UserItem = ({item, users, setUsers, setSuccess, setResponseActive}) => {
+const UserItem = ({item, users, setUsers, setSuccess, setResponseActive, preLoader, setPreLoader}) => {
     const [active, setActive] = useState(false)
-    const [preLoader, setPreLoader] = useState(false)
 
     const deleteItem = async () =>{
         setActive(false)
         setPreLoader(true);
         deleteUser(item.id).then(data=>{console.log(data); setUsers(users.filter(us => us.id !== item.id));
             setResponseActive(true);
-            setSuccess(true);})
+            setSuccess(true);
+            setPreLoader(false);})
     }
 
   return (<>
-    {preLoader ? <Loading/> : <></>}
     <div className="user__item">
         <p className="user__item__text">{item.id}</p>
         <p className="user__item__text">{item.name}</p>

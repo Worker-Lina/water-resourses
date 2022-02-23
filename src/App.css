@@ -128,8 +128,11 @@ body{
 }
 .page__content__item{
     display: grid;
-    grid-template-columns: 10% 1fr 1fr 1fr;
+    grid-template-columns: 5% 1fr 1fr 15%;
     align-items: center;
+}
+.user-item-page{
+  grid-template-columns: 5% 1fr 1fr 10%;
 }
 .content__item__text{
     font-size: 16px;
@@ -206,12 +209,8 @@ body{
   font-size: 16px;
   font-weight: 600;
 }
-.item-icons{
-  display: flex;
-  justify-content: end;
-}
 .text-actions{
-  text-align: end;
+  margin-left:5px;
 }
 
 .preLoader{
