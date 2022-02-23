@@ -79,13 +79,13 @@ const NavBar = observer(() => {
                     </MyButton>
                   }
                   {user.isAuth && hover ? <div className="popupMenu">
-                      <Link to={SETTINGS_ROUTE}>Настройки</Link>
+                      <Link to={SETTINGS_ROUTE} onClick={()=>setActive(false)} className="popupMenu__item">Настройки</Link>
                       <div className="popupMenu__line"></div>
-                      <Link to={USERS_ROUTE}>Пользователи</Link>
+                      <Link to={USERS_ROUTE} onClick={()=>setActive(false)} className="popupMenu__item">Пользователи</Link>
                       <div className="popupMenu__line"></div>
-                      <Link to={OBJECTS_ROUTE}>Объекты</Link>
+                      <Link to={OBJECTS_ROUTE} onClick={()=>setActive(false)} className="popupMenu__item">Объекты</Link>
                       <div className="popupMenu__line"></div>
-                      <p onClick={() => logout()} className="navbar-click">Выйти
+                      <p onClick={() => logout()} className="navbar-click" className="popupMenu__item">Выйти
                       </p>
                     </div> : <></>}
                 </div>

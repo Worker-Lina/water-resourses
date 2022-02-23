@@ -46,7 +46,6 @@
     width: 30px;
     height: 30px;
     cursor: pointer;
-
 }
 .navbar__menu{
     width: 20px;
@@ -55,6 +54,7 @@
     background-color: #5584AC;
     cursor: pointer;
     position: relative;
+    transition: .4s;
 }
 .navbar__menu:before{
     content: "";
@@ -64,6 +64,7 @@
     background-color: #5584AC;
     position: absolute;
     top: 20px;
+    transition: .4s;
 }
 .navbar__menu:after{
     content: "";
@@ -73,7 +74,22 @@
     background-color: #5584AC;
     position: absolute;
     top: 10px;
+    transition: .4s;
 }
+.navbar__menu-div:hover .navbar__menu{
+    width: 30px;
+}
+.navbar__menu-div:hover .navbar__menu:before{
+    width: 22px;
+}
+.navbar__menu-div:hover .navbar__menu::after{
+    width: 15px;
+}
+.popupMenu__item:hover{
+    text-shadow:  0 0 1em #3377b3;
+    cursor: pointer;
+}
+
 .btn-icon{
     margin-right: 10px;
 }

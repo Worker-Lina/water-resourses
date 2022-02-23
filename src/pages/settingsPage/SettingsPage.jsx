@@ -1,7 +1,9 @@
 import React from 'react'
+import Helmet from 'react-helmet'
 import { Link, useNavigate} from 'react-router-dom'
 import { useEffect, useState } from 'react/cjs/react.development'
 import Loading from '../../components/loading/Loading'
+import PreLoader from '../../components/loading/PreLoader'
 import MyButton from '../../components/myButton/MyButton'
 import ResponseRequets from '../../components/responseRequest/ResponseRequets'
 import { check, updatePassword, updateProfile, updateUser } from '../../http/userApi'
@@ -21,6 +23,7 @@ const SettingsPage = () => {
     const [isCorrectPassword, setIsCorrectPassword] = useState(true)
     const [isPasswordConfirmed, setIsPasswordConfirmed] = useState(true)
     const [loading, setLoading]  =useState(false)
+    const [loadingPassword, setLoadingPassword]  =useState(false)
 
     useEffect(()=>{
         setLoading(true);
@@ -59,7 +62,8 @@ const SettingsPage = () => {
         }
         setIsPasswordConfirmed(true)
         try{
-            updatePassword(password, confirmedPassword).then(data=>{ setPassword(''); setConfirmedPassword('');
+            setLoadingPassword(true);
+            updatePassword(password, confirmedPassword).then(data=>{ setPassword(''); setConfirmedPassword('');setLoadingPassword(false);
             setSuccess(true); setActive(true)})
         }catch(e){
             setSuccess(false); setActive(true)
@@ -69,13 +73,16 @@ const SettingsPage = () => {
 
   return (
     <div className="setting__page">
-        {loading ? <Loading/> : <></>}
+        <Helmet>
+          <title>Настройки</title>
+        </Helmet>
         {active ? <ResponseRequets success={success} active={active} setActive={setActive}></ResponseRequets> : <></>}
         <div className="page__item">
             <MyButton variant="blue" onClick={() => navigate(-1)}> <span className="button__left"></span> Назад</MyButton>
             <div className="page__subtitle">Настройки</div>
         </div>
         <div className="page__form">
+            {loading ? <PreLoader/> : <></>}
             <p className="setting__page__subtitle">Персональные данные</p>
             <div className="label">ФИО *</div>
             <input className={isCorrectFullName ? "input" : "input input-error"} type="text" placeholder="ФИО" value={fullName} onChange={e=>setFullName(e.target.value)}></input>
@@ -90,6 +97,7 @@ const SettingsPage = () => {
             </div>
         </div>
         <div className="page__form">
+            {loadingPassword ? <PreLoader/> : <></>}
             <p className="setting__page__subtitle">Изменение пароля</p>
             <div className="label">Новый пароль *</div>
             <input className={isCorrectPassword ? "input" : "input input-error"} type="password" placeholder="новый пароль" value={password} onChange={e=>setPassword(e.target.value)}></input>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Helmet from 'react-helmet'
 import { Link } from 'react-router-dom'
 import Loading from '../../components/loading/Loading'
 import MyButton from '../../components/myButton/MyButton'
@@ -23,6 +24,9 @@ const UsersPage = () => {
 
   return (
     <div className="users__page">
+        <Helmet>
+          <title>Пользователи</title>
+        </Helmet>
         {responseActive ? <ResponseRequets active={responseActive} setActive={setResponseActive} success={success}/> : <></>}
         <div className="page__item">
             <div className="page__subtitle">Пользователи</div>
@@ -33,7 +37,7 @@ const UsersPage = () => {
                 <p className="content__item__text">ID</p>
                 <p className="content__item__text">Название</p>
                 <p className="content__item__text">E-mail</p>
-                <p className="content__item__text">Действия</p>
+                <p className="content__item__text text-actions">Действия</p>
             </div>
             <div className="line"></div>
             {users.length ? users.map(user =>

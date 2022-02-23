@@ -6,21 +6,22 @@
 .create__object__page .page__subtitle{
     margin-left: 10px;
 }
-.object__page__selections{
+.object__page-selections{
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
     
 }
-.object__page_select{
+.object__page-select{
     padding: 10px 25px;
     border-radius: 4px;
     border: none;
     background: #f3f4f6;
     display: grid;
     grid-template-columns: 1fr auto auto auto;
+    cursor: pointer;
 }
-.page__select_parent{
+.page__select-parent{
     position: relative;
 }
 .select-icon{
@@ -33,6 +34,8 @@
 }
 .select-icon-active{
     transform: rotate(135deg);
+    position: relative;
+    top: 5px;
 }
 .select-line{
     height: 20px;
@@ -75,6 +78,11 @@
     height: 100px;
     margin-bottom: 10px;
     position: relative;
+    border: 2px dashed #f3f4f6;
+    transition: .4s;
+}
+.img__upload:hover{
+    border: 2px dashed #777777;
 }
 .input__upload{
     position: absolute;
@@ -103,6 +111,9 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
+}
+.img-cart-icon:hover path{
+    fill: rgb(211, 14, 14);
 }
 .img-cart-block{
     display: flex;
@@ -174,6 +185,17 @@
   }
   .select-error{
       background: rgb(240, 164, 164, .4);
+  }
+  .select-cross:hover{
+      color:rgb(211, 14, 14);
+  }
+  .select-icon:hover{
+      border-bottom: 2px solid #0b76ef;
+      border-left: 2px solid #0b76ef;
+  }
+
+  .object__page-select:hover{
+    box-shadow:  1px 1px 5px 0px rgba(172, 172, 172, 0.75);
   }
 
   @media(max-width:1600px){

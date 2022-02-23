@@ -114,6 +114,7 @@ body{
     padding: 20px;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 .page__buttons{
     display: flex;
@@ -141,15 +142,25 @@ body{
     height: 30px;
     border-radius: 2px;
     cursor: pointer;
+    margin-left: 5px;
 }
 .basket-icon{
     background-color: #fdeeee;
-    margin-left: 5px;
 }
 .eye-icon{
 	background-color: #daf7f6;
-
 }
+
+.icon:hover{
+  box-shadow:  1px 1px 11px 0px #a4cadf;
+}
+.basket-icon:hover{
+  box-shadow:  1px 1px 11px 0px #e9b6b6;
+}
+.eye-icon:hover{
+  box-shadow:  1px 1px 11px 0px #b0e6e4;
+}
+
 .error-label{
   color: red;
   margin-bottom: 10px;
@@ -194,4 +205,33 @@ body{
 .deletion__modal__content p{
   font-size: 16px;
   font-weight: 600;
+}
+.item-icons{
+  display: flex;
+  justify-content: end;
+}
+.text-actions{
+  text-align: end;
+}
+
+.preLoader{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: rgb(255 255 255 / 50%);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+.preLoader__content{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: absolute;
+  border: 2px dashed black;
+  animation: rotate 1s infinite linear;
+  z-index: 100;
 }

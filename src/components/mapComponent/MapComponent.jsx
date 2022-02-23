@@ -53,7 +53,8 @@ const MapComponent = ({textVisible, setTextVisible, props, location, setLocation
   //функция для приближения карты к выделенному объекту
   function handleOnFlyTo(position) {
     const map  = mapRef.current;
-    map.flyTo([position.lat, position.lng + 0.2], 10, {
+    console.log(position)
+    map.flyTo([Number(position.lat), Number(position.lng) + 0.2], 10, {
       duration: 1
     });
   }
@@ -78,30 +79,29 @@ const MapComponent = ({textVisible, setTextVisible, props, location, setLocation
       document.getElementById('footer').classList.remove('footer-hidden');
     }
   }
-  const [positionMarker, setPositionMarker] = useState(null)
 
   function LocationMarker() {
     const map = useMapEvents({
       click(e) {
-        setPositionMarker(e.latlng)
-        setLocation({"lat": e.latlng.lat, "lng": e.latlng.lng})
+        setLocation({"lat": e.latlng.lat-0.04, "lng": e.latlng.lng});
       },
     })
-  
-    return positionMarker === null ? null : (
-      <Marker position={positionMarker} icon={redIcon}>
+
+    return location === null ? null : (
+      <Marker position={location} icon={redIcon}>
       </Marker>
     )
   }
 
   return(<div className="map__container">
-     <MapContainer whenCreated={ mapInstance => { mapRef.current = mapInstance; addPolylinesToMap() } } className="myMap" center={center} zoom={zoom} scrollWheelZoom={false} zoomControl={false} doubleClickZoom={false} maxBounds={maxBounds}>
+     <MapContainer whenCreated={ mapInstance => { 
+       mapRef.current = mapInstance; addPolylinesToMap();} } className="myMap" center={center} zoom={zoom} scrollWheelZoom={false} zoomControl={false} doubleClickZoom={false} maxBounds={maxBounds}>
       <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=Orq9UsgNWFD0JZUL2f7X" minZoom={8}
       />
       {loading ?
       markers.map(marker => 
-        <Marker key={marker.id} position={marker.location ? marker.location : defauleLocation} icon={marker.type.id === 1 ? blueIcon : marker.type.id === 2 ? greenIcon : orangeIcon} title={marker.name} eventHandlers={{click:()=>{
+        <Marker key={marker.id} position={marker.location} icon={marker.type.id === 1 ? blueIcon : marker.type.id === 2 ? greenIcon : orangeIcon} title={marker.name} eventHandlers={{click:()=>{
           setIdItem(marker.id); 
           setActive(true);
           handleOnFlyTo(marker.location);

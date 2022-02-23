@@ -9,6 +9,7 @@ import { useParams } from 'react-router';
 import ResponseRequets from '../../components/responseRequest/ResponseRequets'
 import { emailValidation, nameValidate } from '../../utils/validate'
 import Loading from '../../components/loading/Loading'
+import Helmet from 'react-helmet'
 
 const UserCreatePage = () => {
     const {id} = useParams()
@@ -64,6 +65,9 @@ const UserCreatePage = () => {
     <div className="userCreatePage">
         {preLoader ? <Loading/> : <></>}
         {active ? <ResponseRequets active={active} setActive={setActive} success={successRequest}/> : <></>}
+        <Helmet>
+          <title>{id ? "Редактирование " : "Создание " }пользователя</title>
+        </Helmet>
         <div className="page__item">
             <Link to={USERS_ROUTE}><MyButton variant="blue"><span className="button__left"> </span>Назад</MyButton></Link>
             <div className="page__subtitle">{id ? "Редактирование " : "Создание " }пользователя</div>

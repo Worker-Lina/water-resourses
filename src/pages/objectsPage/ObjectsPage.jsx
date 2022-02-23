@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Helmet from 'react-helmet'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import Loading from '../../components/loading/Loading'
@@ -27,6 +28,9 @@ const ObjectsPage = () => {
 
   return (
     <div className="objects__page">
+        <Helmet>
+          <title>Объекты</title>
+        </Helmet>
         {responseActive ? <ResponseRequets active={responseActive} setActive={setResponseActive} success={success}/> : <></>}
         <div className="page__item">
             <div className="page__subtitle">Объекты</div>
@@ -37,7 +41,7 @@ const ObjectsPage = () => {
                 <p className="content__item__text">ID</p>
                 <p className="content__item__text">Название</p>
                 <p className="content__item__text">Статус</p>
-                <p className="content__item__text">Действия</p>
+                <p className="content__item__text text-actions">Действия</p>
             </div>
             <div className="line"></div>
             {objects.length ? objects.map(object =>
