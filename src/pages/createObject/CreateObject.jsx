@@ -9,7 +9,7 @@ import MyButton from '../../components/myButton/MyButton';
 import MapComponent from '../../components/mapComponent/MapComponent';
 import ImgCart from '../../components/createObjectsComponents/ImgCart';
 import MySelect from '../../components/createObjectsComponents/MySelect';
-import ImgUpload from '../../components/createObjectsComponents/ImgUpload';
+import ImgUpload, { genUUID } from '../../components/createObjectsComponents/ImgUpload';
 import TinyEditor from '../../components/createObjectsComponents/TinyEditor';
 import ResponseRequets from '../../components/responseRequest/ResponseRequets';
 import { createObject, fetchObjectsStatus, fetchObjectsTypes, fetchOneObjectByAdmin, updateObject, uploadImage } from '../../http/reservoirApp';
@@ -196,7 +196,7 @@ const CreateObject = () => {
         for(let i=0;i<files.length;i++){
             var reader = new FileReader();
             reader.onload = function (e) {
-                let img = {url:e.target.result, type:files[i].type, name: files[i].name}
+                let img = {id: genUUID(), url:e.target.result, type:files[i].type, name: files[i].name}
                 setImages(prevImages => [...prevImages, img])
             }        
             reader.readAsDataURL(files[i]);

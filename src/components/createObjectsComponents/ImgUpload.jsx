@@ -2,16 +2,15 @@ import React from 'react'
 import { useState } from 'react/cjs/react.development'
 import ImgCart from './ImgCart'
 
+export const genUUID = () => {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8)
+    return v.toString(16)
+  })
+}
 const ImgUpload = ({text, image, setImage}) => {
     const [active, setActive] =useState(false)
     const [someImg, setSomeImg] = useState(null)
-
-    const genUUID = () => {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8)
-          return v.toString(16)
-        })
-      }
     function dragStartHandler(e){
         e.preventDefault();
     }
@@ -38,7 +37,6 @@ const ImgUpload = ({text, image, setImage}) => {
     }
 
     async function onAddImage(e){
-      console.log("onaddimage")
       let files = [...e.target.files]
       if(files[0].size >= 5242880){
         return

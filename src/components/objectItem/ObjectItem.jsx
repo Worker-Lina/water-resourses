@@ -5,20 +5,19 @@ import Loading from '../loading/Loading'
 import MyButton from '../myButton/MyButton'
 import "./objectItem.css"
 
-const ObjectItem = ({item, objects, setObjects, setSuccess, setResponseActive}) => {
-    const [active, setActive] = useState(false)
-    const [preLoader, setPreLoader] = useState(false)
+const ObjectItem = ({item, objects, setObjects, setSuccess, setResponseActive, preLoader, setPreLoader}) => {
+    const [active, setActive] = useState(false);
 
     const deleteItem = async () =>{
         setActive(false)
         setPreLoader(true);
         deleteObject(item.id).then(data=>{console.log(data); setObjects(objects.filter(ob => ob.id !== item.id));
             setResponseActive(true);
-            setSuccess(true);})
+            setSuccess(true);
+            setPreLoader(false);})
     }
 
   return (<>
-      {preLoader ? <Loading/> : <></>}
     <div className="object__item">
         <p className="user__item__text">{item.id}</p>
         <p className="user__item__text">{item.name}</p>

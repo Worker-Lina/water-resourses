@@ -3,6 +3,7 @@
     background: #eeeeee;
     padding: 110px 10% 30px;
     min-height: calc(100vh - 70px);
+    position: relative;
 }
 .objects__page .page__subtitle{
     margin-right: 10px;

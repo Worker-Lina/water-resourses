@@ -19,6 +19,7 @@ const ObjectsPage = () => {
     const [ t, i18n ] = useTranslation();
     const [responseActive, setResponseActive] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [preLoader, setPreLoader] = useState(false)
 
     useEffect(()=>{
         fetchObjectsByAuth(currentPage).then(data => {setObjects(data.content.items); setTotalPages(data.content.total_pages); 
@@ -31,6 +32,8 @@ const ObjectsPage = () => {
         <Helmet>
           <title>Объекты</title>
         </Helmet>
+        {preLoader ? <Loading/> : <></>}
+        {preLoader ? <div className="preLoader"/> : <></>}
         {responseActive ? <ResponseRequets active={responseActive} setActive={setResponseActive} success={success}/> : <></>}
         <div className="page__item">
             <div className="page__subtitle">Объекты</div>
@@ -45,7 +48,8 @@ const ObjectsPage = () => {
             </div>
             <div className="line"></div>
             {objects.length ? objects.map(object =>
-                <ObjectItem key={object.id} item={object} objects={objects} setObjects={setObjects} setSuccess={setSuccess} setResponseActive={setResponseActive}></ObjectItem>
+                <ObjectItem key={object.id} item={object} objects={objects} setObjects={setObjects} 
+                preLoader={preLoader} setPreLoader={setPreLoader} setSuccess={setSuccess} setResponseActive={setResponseActive}></ObjectItem>
             ) : <Loading></Loading>} 
             <Pagination totalPages={totalPages} page={currentPage} changePage={setCurrentPage}></Pagination>
         </div>

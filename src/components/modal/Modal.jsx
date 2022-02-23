@@ -29,7 +29,6 @@ const Modal = ({id, active, setActive, mapRef, center, zoom}) => {
     slides = slides.filter((el) =>{
       return (el != null && el != "")
     })
-    console.log(slides)
     return slides
   }
 
