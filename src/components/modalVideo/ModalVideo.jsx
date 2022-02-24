@@ -31,7 +31,7 @@ const ModalVideo = ({active, setActive, slides, current}) => {
         {slides.map((slide, index) => 
           <div className={index===currentInModal ? 'modal-slide modal-slide__active' : 'modal-slide'} key = {index}>
             {slide.url ? 
-              <img src={"https://turkestan.panama.kz" + slide.url} alt="travel" className="modal-slide-img"
+              <img src={"https://dev14.panama.kz" + slide.url} alt="travel" className="modal-slide-img"
               onClick={(e)=>{e.stopPropagation(); setFullScreenClass(!fullScreenClass)}}/> 
               :
               <div className="modal-video__content">
