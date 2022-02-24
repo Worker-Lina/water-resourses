@@ -48,7 +48,7 @@ const UsersPage = () => {
                 <UserItem key={user.id} item={user} users={users}
                 preLoader = {preLoader} setPreLoader = {setPreLoader}
                 setUsers={setUsers} setSuccess={setSuccess} setResponseActive = {setResponseActive}></UserItem>
-            ) : <Loading></Loading>} 
+            ) : <></>} 
             <Pagination totalPages={totalPages} page={currentPage} changePage={setCurrentPage}></Pagination>
             
         </div>

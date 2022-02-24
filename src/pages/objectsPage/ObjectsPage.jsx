@@ -33,6 +33,7 @@ const ObjectsPage = () => {
         <Helmet>
           <title>Объекты</title>
         </Helmet>
+        {preLoader ? <Loading/> : <></>}
         {preLoader ? <div className="preLoader"/> : <></>}
         {responseActive ? <ResponseRequets active={responseActive} setActive={setResponseActive} success={success}/> : <></>}
         <div className="page__item">
@@ -50,7 +51,7 @@ const ObjectsPage = () => {
             {objects.length ? objects.map(object =>
                 <ObjectItem key={object.id} item={object} objects={objects} setObjects={setObjects} 
                 preLoader={preLoader} setPreLoader={setPreLoader} setSuccess={setSuccess} setResponseActive={setResponseActive}></ObjectItem>
-            ) : <Loading></Loading>} 
+            ) : <></>} 
             <Pagination totalPages={totalPages} page={currentPage} changePage={setCurrentPage}></Pagination>
         </div>
     </div>
