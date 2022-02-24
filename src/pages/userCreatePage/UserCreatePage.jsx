@@ -52,7 +52,7 @@ const UserCreatePage = () => {
                     setSuccessRequest(true); setActive(true); setPreLoader(false) })
             }catch(e){
                 console.log(e);
-                setPreLoader(false);setSuccess(false);
+                setPreLoader(false);setActive(true);setSuccess(false);
             }
         }else{
             setPreLoader(true);
@@ -60,7 +60,7 @@ const UserCreatePage = () => {
                 createUser(fullName, email).then(data=>{console.log(data); setSuccess(true); setUserId(data.content.id);
                     setSuccessRequest(true); setActive(true); setPreLoader(false)});
             }catch(e){
-                console.log(e);setPreLoader(false);setSuccess(false);
+                console.log(e);setPreLoader(false);setActive(true);setSuccess(false);
             }
         }
     }
