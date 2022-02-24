@@ -47,12 +47,21 @@ const UserCreatePage = () => {
         setIsCorrectEmail(true)
         if(id){
             setPreLoader(true);
-            updateUser(id, fullName, email).then(data => {setSuccess(true);
-            setSuccessRequest(true); setActive(true); setPreLoader(false) })
+            try{
+                updateUser(id, fullName, email).then(data => {setSuccess(true);
+                    setSuccessRequest(true); setActive(true); setPreLoader(false) })
+            }catch(e){
+                console.log(e);
+                setPreLoader(false);setSuccess(false);
+            }
         }else{
             setPreLoader(true);
-            createUser(fullName, email).then(data=>{console.log(data); setSuccess(true); setUserId(data.content.id);
-            setSuccessRequest(true); setActive(true); setPreLoader(false)});
+            try{
+                createUser(fullName, email).then(data=>{console.log(data); setSuccess(true); setUserId(data.content.id);
+                    setSuccessRequest(true); setActive(true); setPreLoader(false)});
+            }catch(e){
+                console.log(e);setPreLoader(false);setSuccess(false);
+            }
         }
     }
 
@@ -78,8 +87,8 @@ const UserCreatePage = () => {
             <input className={isCorrectFullName ? "input" : "input input-error"} type="text" placeholder="ФИО" value={fullName} onChange={e=>setFullName(e.target.value)}></input>
             {isCorrectFullName ? <></> : <div className="label error-label">Введено некорректное имя</div>}
             <div className="label">E-mail *</div>
-            {isCorrectEmail ? <></> : <div className="label error-label">Введен некорректный E-mail</div>}
             <input className={isCorrectEmail ? "input" : "input input-error"} placeholder="e-mail" type="email" value={email} onChange={e=>setEmail(e.target.value)}></input>
+            {isCorrectEmail ? <></> : <div className="label error-label">Введен некорректный E-mail</div>}
             {visible ? <div className="userCreatePage__newPassword">Новый пароль: {password}</div> : <></>}
             <div className="line"></div>
             <div className="page__buttons">

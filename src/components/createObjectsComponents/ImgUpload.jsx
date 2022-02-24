@@ -9,7 +9,6 @@ export const genUUID = () => {
   })
 }
 const ImgUpload = ({text, image, setImage}) => {
-    const [active, setActive] =useState(false)
     const [someImg, setSomeImg] = useState(null)
     function dragStartHandler(e){ e.preventDefault(); }
     function dragLeaveHandler(e){ e.preventDefault(); }
