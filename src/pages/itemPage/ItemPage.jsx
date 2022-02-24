@@ -19,7 +19,7 @@ const ItemPage = () => {
 
   useEffect(() => {
     try{
-      fetchOneObject(id).then(data => {setItem(data.content); setLoading(true);})
+      fetchOneObject(id).then(data => {setItem(data.content); setLoading(true);}) // вытягивание объекта по id
     }catch(e){
       console.log(e)
     }

@@ -66,7 +66,7 @@ const MapComponent = ({textVisible, setTextVisible, props, location, setLocation
       antPolyline.addTo(map)
     }
   }
-
+ // функция которая увеличивает карту на весь экран
   const mapToFullScreen = ()=>{
     setTextVisible(!textVisible)
     let height = window.screen.width <= 640 ? window.innerHeight - 50 : window.innerHeight - 80

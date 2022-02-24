@@ -7,6 +7,8 @@ const ModalVideo = ({active, setActive, slides, current}) => {
   const [fullScreenClass, setFullScreenClass] = useState(false)
   const [leftSide, setLeftSide] = useState(false)
   const length = slides.length
+
+  //функция которая преобразует ссылку из ютуба в корректную 
   function youtube_parser(image){
     var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
     var match = image.match(regExp);

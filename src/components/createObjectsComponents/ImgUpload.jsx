@@ -14,6 +14,7 @@ const ImgUpload = ({text, image, setImage}) => {
     function dragStartHandler(e){ e.preventDefault(); }
     function dragLeaveHandler(e){ e.preventDefault(); }
 
+    // функция загрузки изображений путем перетаскивания и выбора кликом
     async function ondropHandler(e){
       e.preventDefault();
       let files = [];

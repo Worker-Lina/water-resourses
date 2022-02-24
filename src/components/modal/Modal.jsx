@@ -16,7 +16,7 @@ const Modal = ({id, active, setActive, mapRef, center, zoom}) => {
   useEffect(() => {
     fetchOneObject(id).then(data => {setItem(data.content); setLoading(true)})
   }, [i18n.language, id])
-
+// функция которая проверяет корректность слайдов в массиве
   const getCorrectSlides = ()=>{
     {item.photos && item.video ? 
       slides = [].concat(item.photos, item.video) :

@@ -33,7 +33,6 @@ const ObjectsPage = () => {
         <Helmet>
           <title>Объекты</title>
         </Helmet>
-        {preLoader ? <Loading/> : <></>}
         {preLoader ? <div className="preLoader"/> : <></>}
         {responseActive ? <ResponseRequets active={responseActive} setActive={setResponseActive} success={success}/> : <></>}
         <div className="page__item">

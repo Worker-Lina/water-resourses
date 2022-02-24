@@ -65,7 +65,7 @@ export const fetchReport = async () => {
   })
   return data
 }
-
+//запрос на вытягивание всех пользователей
 export const fetchUsers = async (page) => {
   const {data} = await $authHost.get('/api/admin/users', 
   { params: {
@@ -77,7 +77,7 @@ export const fetchUsers = async (page) => {
   )
   return data
 }
-
+//запрос на вытягивание всех объектов админом
 export const fetchObjectsByAuth = async (page) => {
   const {data} = await $authHost.get('/api/admin/objects', 
   { params: {
@@ -89,8 +89,7 @@ export const fetchObjectsByAuth = async (page) => {
   )
   return data
 }
-
-
+//удаления объекта
 export const deleteObject = async (id) => {
   const headers = { 
       'language': i18n.language
@@ -98,7 +97,7 @@ export const deleteObject = async (id) => {
   const data = await $authHost.delete('/api/admin/objects/'+id, { headers })
   return data
 }
-
+//загрузка изображений на сервер
 export const uploadImage = async (formData) => {
   const headers = { 
     'language': i18n.language
@@ -106,7 +105,7 @@ export const uploadImage = async (formData) => {
   const {data} = await $authHost.post('/api/admin/upload/image', formData, {headers})
   return data
 }
-
+//запрос на создание объекта
 export const createObject = async (formData) => {
   const headers = { 
       'language': i18n.language
@@ -114,7 +113,7 @@ export const createObject = async (formData) => {
   const {data} = await $authHost.post('/api/admin/objects/store', formData, {headers})
   return data
 }
-
+//запрос на вытягивание одного объекта админом
 export const fetchOneObjectByAdmin = async (id) => {
   const headers = { 
       'language': i18n.language
@@ -122,7 +121,7 @@ export const fetchOneObjectByAdmin = async (id) => {
   const {data} = await $authHost.get('/api/admin/objects/'+id, {headers})
   return data
 }
-
+//запрос на вытягивание типов объекта
 export const fetchObjectsTypes = async () => {
   const headers = { 
       'language': i18n.language
@@ -130,7 +129,7 @@ export const fetchObjectsTypes = async () => {
   const {data} = await $authHost.get('/api/admin/dictionaries/objectTypes', {headers})
   return data
 }
-
+//запрос на вытягивание статусов объекта
 export const fetchObjectsStatus = async () => {
   const headers = { 
       'language': i18n.language
@@ -138,7 +137,7 @@ export const fetchObjectsStatus = async () => {
   const {data} = await $authHost.get('/api/admin/dictionaries/objectStatuses', {headers})
   return data
 }
-
+//запрос на обновления объекта
 export const updateObject = async (id, formData) => {
   const headers = { 
       'language': i18n.language

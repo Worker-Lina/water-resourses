@@ -41,6 +41,7 @@ const Slider = ({images}) => {
     } else {
         document.body.style.overflowY = "scroll";
     }
+    //проверка является ли ссылка из ютуба
     const checkurl= (url) => {
         return url.replace("http://","").replace("https://","").replace("www.","").replace("youtu.be/","youtube.com?v=").slice(0,14)==="youtube.com?v=" || 
         url.replace("http://","").replace("https://","").replace("www.","").replace("youtu.be/","youtube.com?v=").slice(0,14)==="youtube.com/wa";

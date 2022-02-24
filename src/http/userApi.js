@@ -1,8 +1,8 @@
 import {$authHost, $host} from "./index";
-import jwt_decode from "jwt-decode";
 import i18n from 'i18next'
 import axios from "axios";
 
+// создание пользователя
 export const createUser = async (name, email) => {
     const article = { name: name, email: email };
     const headers = { 
@@ -11,7 +11,7 @@ export const createUser = async (name, email) => {
     const {data} = await $authHost.post('/api/admin/users/store', article, {headers})
     return data
 }
-
+//обновление пользователя
 export const updateUser = async (id, name, email) => {
     const article = { name: name, email: email };
     const headers = { 
@@ -20,7 +20,7 @@ export const updateUser = async (id, name, email) => {
     const {data} = await $authHost.post('/api/admin/users/'+id, article, {headers})
     return data
 }
-
+// авторизация пользователя
 export const login = async (email, password) => {
     const article = { email: email, password: password };
     const headers = { 
@@ -32,7 +32,7 @@ export const login = async (email, password) => {
     }
     return data
 }
-
+//удаление пользователя
 export const deleteUser = async (id) => {
     const headers = { 
         'language': i18n.language
@@ -40,7 +40,7 @@ export const deleteUser = async (id) => {
     const data = await $authHost.delete('/api/admin/users/'+id, { headers })
     return data
 }
-
+//получение данных авторизованного пользователя
 export const check = async () => {
     const headers = { 
         'language': i18n.language
@@ -48,7 +48,7 @@ export const check = async () => {
     const {data} = await $authHost.get('/api/admin/profile', { headers })
     return data
 }
-
+//обновление данных авторизованного пользователя
 export const updateProfile = async (name, email) => {
     const article = { name: name, email: email };
     const headers = { 
@@ -57,7 +57,7 @@ export const updateProfile = async (name, email) => {
     const {data} = await $authHost.post('/api/admin/profile/update', article, {headers})
     return data
 }
-
+// обновление пароля
 export const updatePassword = async (password, password_confirmation) => {
     const article = { password: password, password_confirmation: password_confirmation };
     const headers = { 
@@ -66,7 +66,7 @@ export const updatePassword = async (password, password_confirmation) => {
     const data = await $authHost.post('/api/admin/profile/updatePassword', article, {headers})
     return data
 }
-
+//сброс пароля
 export const resetPassword = async (id) => {
     const article = { };
     const headers = { 
@@ -76,8 +76,7 @@ export const resetPassword = async (id) => {
     const {data} = await $authHost.post('/api/admin/users/'+id+'/resetPassword', article, {headers})
     return data
 }
-
-
+//запрос на вытягивание одного пользователя
 export const fecthOneUser = async (id) => {
     const headers = { 
         'language': i18n.language

@@ -32,42 +32,42 @@ const SettingsPage = () => {
 
     const updateMyProfile = async () =>{
         if(!nameValidate(fullName)){
-            setIsCorrectFullName(false)
+            setIsCorrectFullName(false);
             return
         }
         setIsCorrectFullName(true)
         if(!emailValidation(email)){
-            setIsCorrectEmail(false)
+            setIsCorrectEmail(false);
             return
         }
         setIsCorrectEmail(true)
         try{
             setLoading(true);
-            updateProfile(fullName, email).then(data=>{setSuccess(true); setActive(true); setLoading(false);})
+            updateProfile(fullName, email).then(data=>{setSuccess(true); setActive(true); setLoading(false);});
         }catch(e){
-            setSuccess(false); setActive(true); setLoading(false)
-            console.log(e)
+            setSuccess(false); setActive(true); setLoading(false);
+            console.log(e);
         }
     }
 
     const updateMyPassword = async () =>{
         if(!passwordValidate(password)){
-            setIsCorrectPassword(false)
+            setIsCorrectPassword(false);
             return
         }
         setIsCorrectEmail(true)
         if(password !== confirmedPassword){
-            setIsPasswordConfirmed(false)
+            setIsPasswordConfirmed(false);
             return
         }
-        setIsPasswordConfirmed(true)
+        setIsPasswordConfirmed(true);
         try{
             setLoadingPassword(true);
             updatePassword(password, confirmedPassword).then(data=>{ setPassword(''); setConfirmedPassword('');setLoadingPassword(false);
-            setSuccess(true); setActive(true)})
+            setSuccess(true); setActive(true)});
         }catch(e){
-            setSuccess(false); setActive(true)
-            console.log(e)
+            setSuccess(false); setActive(true);
+            console.log(e);
         }
     }
 

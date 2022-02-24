@@ -42,7 +42,7 @@ const NavBar = observer(() => {
     } else {
       document.body.style.overflowY = "scroll";
     }
-
+    //функция выхода пользователя
     const logout = () => {
       localStorage.removeItem('token');
       user.setUser({})
