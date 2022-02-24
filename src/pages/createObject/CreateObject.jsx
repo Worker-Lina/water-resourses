@@ -73,6 +73,19 @@ const CreateObject = () => {
         }
     }, [id])
         
+    const darftPhotoSend = async (formData, item, itemName)=>{
+        if(item.url){
+            formData.append(`${itemName}[0][url]`, item.url)
+        }else{
+            let projectRuFormData = new FormData()
+            projectRuFormData.append('file', item)
+            let data = await uploadImage(projectRuFormData);
+            formData.append(`${itemName}[0][url]`, data.content.value)
+        }
+        formData.append(`${itemName}[0][type]`, item.type)
+        formData.append(`${itemName}[0][name]`, item.name)
+    }
+
     const onSubmit = async (data) => {
         !location ? setIsCorrectLocation(false) : setIsCorrectLocation(true);
         !type ? setIsCorrectType(false) :setIsCorrectType(true)
@@ -119,43 +132,15 @@ const CreateObject = () => {
         }
             
         if(project_draft_ru){
-            if(project_draft_ru.url){
-                formData.append(`project_draft_ru[0][url]`, project_draft_ru.url)
-            }else{
-                let projectRuFormData = new FormData()
-                projectRuFormData.append('file', project_draft_ru)
-                let data = await uploadImage(projectRuFormData);
-                formData.append(`project_draft_ru[0][url]`, data.content.value)
-            }
-            formData.append(`project_draft_ru[0][type]`, project_draft_ru.type)
-            formData.append(`project_draft_ru[0][name]`, project_draft_ru.name)    
+            let result = await darftPhotoSend(formData, project_draft_ru, "project_draft_ru");
         }
 
         if(project_draft_kk){
-            if(project_draft_kk.url){
-                formData.append(`project_draft_kk[0][url]`, project_draft_kk.url)
-            }else{
-                let projectRuFormData = new FormData()
-                projectRuFormData.append('file', project_draft_kk)
-                let data = await uploadImage(projectRuFormData);
-                formData.append(`project_draft_kk[0][url]`, data.content.value)
-            }
-            formData.append(`project_draft_kk[0][type]`, project_draft_kk.type)
-            formData.append(`project_draft_kk[0][name]`, project_draft_kk.name)    
+            let result = await darftPhotoSend(formData, project_draft_kk, "project_draft_kk");  
         }
 
         if(project_draft_en){
-            if(project_draft_en.url){
-                formData.append(`project_draft_en[0][url]`, project_draft_en.url)
-            }
-            else{
-                let projectEnFormData = new FormData()
-                projectEnFormData.append('file', project_draft_en)
-                let data = await uploadImage(projectEnFormData);
-                formData.append(`project_draft_en[0][url]`, data.content.value)
-            }
-            formData.append(`project_draft_en[0][type]`, project_draft_en.type)
-            formData.append(`project_draft_en[0][name]`, project_draft_en.name)
+            let result = await darftPhotoSend(formData, project_draft_en, "project_draft_en");
         }
 
         if(id){
@@ -180,7 +165,7 @@ const CreateObject = () => {
     const selectClick = (e, setSelectActive, selectActive)=>{
         setSelectActive(!selectActive);e.stopPropagation();
         document.body.addEventListener('click', function(){setSelectActive(false)});
-        document.body.removeEventListener('click', function(){setSelectActive(false)})           
+        document.body.removeEventListener('click', function(){setSelectActive(false)});         
     }
 
     function dragStartHandler(e){ e.preventDefault(); }
