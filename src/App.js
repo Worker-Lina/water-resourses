@@ -8,14 +8,8 @@ import Footer from './components/footer/Footer';
 import Helmet from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import { Context } from '.';
-import { check, resetPassword } from './http/userApi';
-import CreateObject from './pages/createObject/CreateObject';
-import ObjectsPage from './pages/objectsPage/ObjectsPage';
-import MainPage from './pages/mainPage/MainPage';
+import { check } from './http/userApi';
 import Loading from './components/loading/Loading';
-import UserCreatePage from './pages/userCreatePage/UserCreatePage';
-import RegisterCom from './RegisterCom';
-import LoginForm from './components/loginForm/LoginForm';
 
 const App = observer(() => {
   const [ t, i18n ] = useTranslation();
@@ -42,11 +36,9 @@ const App = observer(() => {
       <Helmet>
         <html lang={i18n.language}/>
       </Helmet>
-
       <NavBar/>
       <AppRouter/>
       <Footer/>
-
     </BrowserRouter>
   )
 });
