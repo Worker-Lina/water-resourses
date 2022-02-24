@@ -1,4 +1,5 @@
 import "./createObject.css"
+import Helmet from "react-helmet";
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router';
 import { useForm } from "react-hook-form";
@@ -13,7 +14,6 @@ import ImgUpload, { genUUID } from '../../components/createObjectsComponents/Img
 import TinyEditor from '../../components/createObjectsComponents/TinyEditor';
 import ResponseRequets from '../../components/responseRequest/ResponseRequets';
 import { createObject, fetchObjectsStatus, fetchObjectsTypes, fetchOneObjectByAdmin, updateObject, uploadImage } from '../../http/reservoirApp';
-import Helmet from "react-helmet";
 
 const CreateObject = () => {
     const {id} = useParams()
@@ -126,7 +126,6 @@ const CreateObject = () => {
                 projectRuFormData.append('file', project_draft_ru)
                 let data = await uploadImage(projectRuFormData);
                 formData.append(`project_draft_ru[0][url]`, data.content.value)
-                console.log(data)
             }
             formData.append(`project_draft_ru[0][type]`, project_draft_ru.type)
             formData.append(`project_draft_ru[0][name]`, project_draft_ru.name)    
@@ -140,7 +139,6 @@ const CreateObject = () => {
                 projectRuFormData.append('file', project_draft_kk)
                 let data = await uploadImage(projectRuFormData);
                 formData.append(`project_draft_kk[0][url]`, data.content.value)
-                console.log(data)
             }
             formData.append(`project_draft_kk[0][type]`, project_draft_kk.type)
             formData.append(`project_draft_kk[0][name]`, project_draft_kk.name)    
@@ -164,21 +162,20 @@ const CreateObject = () => {
                 try{
                     updateObject(id, formData).then(data => {console.log(data); setActive(true); setSuccess(true); setPreLoader(false)});
                 }catch(e){
-                    setPreLoader(false)
+                    setPreLoader(false);
                     console.log(e);
-                    setSuccess(false)
+                    setSuccess(false);
                 }
             }else{
                 try{
                     createObject(formData).then(data=>{console.log("data ", data); setActive(true); setSuccess(true); setPreLoader(false)}); 
                 }catch(e){
-                    setPreLoader(false)
+                    setPreLoader(false);
                     console.log(e);
-                    setSuccess(false)
+                    setSuccess(false);
                 }
         }  
     }
-
 
     const selectClick = (e, setSelectActive, selectActive)=>{
         setSelectActive(!selectActive);e.stopPropagation();
@@ -292,7 +289,6 @@ const CreateObject = () => {
                     {images.length ? images.map(img =>
                         <ImgCart key={img.url} images={images} setImages={setImages} image={img}/>
                     ): <></>}
-
                     <div className="label">Ссылки на YouTube (макс. 5)</div>
                     <div className="youtube-div">
                         <input className="input" type="text" {...register("video[0]")}></input>

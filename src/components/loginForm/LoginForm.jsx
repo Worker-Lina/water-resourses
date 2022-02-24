@@ -18,9 +18,14 @@ const LoginForm = ({active, setActive}) => {
     setPreLoader(true);
     login(item.Email, item.Password).then(data => {
       console.log(data)
-      user.setUser(user);user.setIsAuth(true);
-      setActive(false);setPreLoader(false);
-      setResponseActive(true);setSuccess(true)
+      if(data.statusCode === 200){
+        user.setUser(user);user.setIsAuth(true);
+        setActive(false);setPreLoader(false);
+        setResponseActive(true);setSuccess(true)
+      }else{
+        alert(data.message);
+        setPreLoader(false);
+      }
     })
   }
 

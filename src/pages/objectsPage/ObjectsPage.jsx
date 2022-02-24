@@ -22,8 +22,9 @@ const ObjectsPage = () => {
     const [preLoader, setPreLoader] = useState(false)
 
     useEffect(()=>{
+        setPreLoader(true);
         fetchObjectsByAuth(currentPage).then(data => {setObjects(data.content.items); setTotalPages(data.content.total_pages); 
-            setCurrentPage(data.content.current_page); setLoading(true)})
+            setCurrentPage(data.content.current_page); setLoading(true); setPreLoader(false)})
     }, [currentPage, i18n.language ])
 
 
