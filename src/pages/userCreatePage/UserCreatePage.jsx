@@ -57,7 +57,7 @@ const UserCreatePage = () => {
     }
 
     const resetMyPassword = async () =>{
-        setPreLoader(true)
+        setPreLoader(true);
         resetPassword(userId).then(data => {console.log(data); setPassword(data.content.password); setVisible(true);
         setPreLoader(false)})
     }

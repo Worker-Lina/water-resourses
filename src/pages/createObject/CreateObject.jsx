@@ -10,9 +10,9 @@ import MyButton from '../../components/myButton/MyButton';
 import MapComponent from '../../components/mapComponent/MapComponent';
 import ImgCart from '../../components/createObjectsComponents/ImgCart';
 import MySelect from '../../components/createObjectsComponents/MySelect';
-import ImgUpload, { genUUID } from '../../components/createObjectsComponents/ImgUpload';
 import TinyEditor from '../../components/createObjectsComponents/TinyEditor';
 import ResponseRequets from '../../components/responseRequest/ResponseRequets';
+import ImgUpload, { genUUID } from '../../components/createObjectsComponents/ImgUpload';
 import { createObject, fetchObjectsStatus, fetchObjectsTypes, fetchOneObjectByAdmin, updateObject, uploadImage } from '../../http/reservoirApp';
 
 const CreateObject = () => {
