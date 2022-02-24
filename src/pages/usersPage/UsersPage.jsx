@@ -19,8 +19,9 @@ const UsersPage = () => {
     const [preLoader, setPreLoader] = useState(false)
 
     useEffect(()=>{
+        setPreLoader(true);
         fetchUsers(currentPage).then(data => {setUsers(data.content.items); setTotalPages(data.content.total_pages); 
-            setCurrentPage(data.content.current_page);})
+            setCurrentPage(data.content.current_page); setPreLoader(false);})
     }, [currentPage])
 
   return (

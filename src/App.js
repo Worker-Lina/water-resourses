@@ -14,7 +14,6 @@ import ObjectsPage from './pages/objectsPage/ObjectsPage';
 import MainPage from './pages/mainPage/MainPage';
 import Loading from './components/loading/Loading';
 import UserCreatePage from './pages/userCreatePage/UserCreatePage';
-import { is } from '@babel/types';
 import RegisterCom from './RegisterCom';
 import LoginForm from './components/loginForm/LoginForm';
 
@@ -37,8 +36,6 @@ const App = observer(() => {
   if (loading) {
       return <Loading />
   }
-
-  localStorage.getItem('token')
 
   return (
     <BrowserRouter >
