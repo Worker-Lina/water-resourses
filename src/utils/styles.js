@@ -29,3 +29,26 @@ export const PageForm = styled.div`
     flex-direction: column;
     position: relative;
 `
+
+export const PageSubtitle = styled.p`
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+`
+
+export const Line = styled.div`
+    height: 1px;
+    background-color: #EEEFF4;
+    margin: 15px 0;
+`
+
+export const Label = styled.div`
+    color: #999898;
+    font-size: 12px;
+    line-height: 20px;
+`
+
+export const LabelError = styled(Label)`
+    color: red;
+    margin-bottom: 10px;
+`
