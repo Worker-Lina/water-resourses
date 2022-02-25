@@ -7,6 +7,7 @@ import PreLoader from '../../components/loading/PreLoader'
 import MyButton from '../../components/myButton/MyButton'
 import ResponseRequets from '../../components/responseRequest/ResponseRequets'
 import { check, updatePassword, updateProfile, updateUser } from '../../http/userApi'
+import { Page, PageForm, PageHeader } from '../../utils/styles'
 import { emailValidation, passwordValidate, nameValidate } from '../../utils/validate'
 import "./settingsPage.css"
 
@@ -72,16 +73,16 @@ const SettingsPage = () => {
     }
 
   return (
-    <div className="setting__page">
+    <Page>
         <Helmet>
           <title>Настройки</title>
         </Helmet>
         {active ? <ResponseRequets success={success} active={active} setActive={setActive}></ResponseRequets> : <></>}
-        <div className="page__item">
+        <PageHeader>
             <MyButton variant="blue" onClick={() => navigate(-1)}> <span className="button__left"></span> Назад</MyButton>
             <div className="page__subtitle">Настройки</div>
-        </div>
-        <div className="page__form">
+        </PageHeader>
+        <PageForm>
             {loading ? <PreLoader/> : <></>}
             <p className="setting__page__subtitle">Персональные данные</p>
             <div className="label">ФИО *</div>
@@ -95,8 +96,8 @@ const SettingsPage = () => {
                 <MyButton variant="border red" onClick={() => navigate(-1)}>Отмена</MyButton>
                 <MyButton variant="green" onClick={updateMyProfile}>Сохранить</MyButton>
             </div>
-        </div>
-        <div className="page__form">
+        </PageForm>
+        <PageForm>
             {loadingPassword ? <PreLoader/> : <></>}
             <p className="setting__page__subtitle">Изменение пароля</p>
             <div className="label">Новый пароль *</div>
@@ -109,8 +110,8 @@ const SettingsPage = () => {
             <div className="page__buttons">
                 <MyButton variant="green" onClick={updateMyPassword}>Изменить пароль</MyButton>
             </div>
-        </div>
-    </div>
+        </PageForm>
+    </Page>
   )
 }
 

@@ -1,5 +1,6 @@
 .report__container{
     padding: 0 10%;
+    min-height: calc(100vh - 70px);
 }
 .report{
     padding: 50px;

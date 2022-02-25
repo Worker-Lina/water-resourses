@@ -236,3 +236,39 @@ body{
   animation: rotate 1s infinite linear;
   z-index: 100;
 }
+
+.slc{
+  padding: 5px 20px;
+}
+.select{
+  position: relative;
+}
+.select-div{
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  background-color: #f3f4f6;
+  border-radius: 4px;
+  z-index: 10;
+}
+.select-item{
+  padding: 10px 25px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.select-item:hover{
+  background-color: #5584AC;
+  color: #ffff;
+}
+.select-input{
+  cursor: pointer; 
+  position: absolute;
+}
+.select__line{
+  width: 1px;
+  height: 20px;
+  background-color: #959595;
+  position: absolute;
+  right: 40px;
+  top: 9px;
+}

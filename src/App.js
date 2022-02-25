@@ -36,9 +36,11 @@ const App = observer(() => {
       <Helmet>
         <html lang={i18n.language}/>
       </Helmet>
+
       <NavBar/>
       <AppRouter/>
       <Footer/>
+
     </BrowserRouter>
   )
 });

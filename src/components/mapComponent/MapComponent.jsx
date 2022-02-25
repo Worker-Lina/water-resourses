@@ -100,11 +100,12 @@ const MapComponent = ({textVisible, setTextVisible, props, location, setLocation
       />
       {loading ?
       markers.map(marker => 
-        <Marker key={marker.id} position={marker.location} icon={marker.type.id === 1 ? blueIcon : marker.type.id === 2 ? greenIcon : orangeIcon} title={marker.name} eventHandlers={{click:()=>{
+        <Marker key={marker.id} position={marker.location} icon={marker.type.id === 1 ? blueIcon : marker.type.id === 2 ? greenIcon : orangeIcon} title={marker.name}  
+        eventHandlers={fullScreenButton ? {click:()=>{
           setIdItem(marker.id); 
           setActive(true);
           handleOnFlyTo(marker.location);
-        }}}> </Marker>
+        }} : ""}> </Marker>
       ) : <></>}
       {polylines.map(poly => 
         <Polyline key={poly.id} positions={poly.positions} pathOptions = {{color: poly.color}} ></Polyline>

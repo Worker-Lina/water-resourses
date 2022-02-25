@@ -9,34 +9,26 @@ import Loading from '../../components/loading/Loading';
 import MyButton from '../../components/myButton/MyButton';
 import MapComponent from '../../components/mapComponent/MapComponent';
 import ImgCart from '../../components/createObjectsComponents/ImgCart';
-import MySelect from '../../components/createObjectsComponents/MySelect';
 import TinyEditor from '../../components/createObjectsComponents/TinyEditor';
 import ResponseRequets from '../../components/responseRequest/ResponseRequets';
 import ImgUpload, { genUUID } from '../../components/createObjectsComponents/ImgUpload';
 import { createObject, fetchObjectsStatus, fetchObjectsTypes, fetchOneObjectByAdmin, updateObject, uploadImage } from '../../http/reservoirApp';
+import NewSelect from "../../components/NewSelect";
 
 const CreateObject = () => {
     const {id} = useParams()
-    const [type, setType] = useState('')
-    const [status, setStatus] = useState('')
-    const [length, setLength] = useState('')
     const [images, setImages] = useState([])
-    const [active, setActive]= useState(false)
-    const [success, setSuccess]= useState(false)
+    const [active, setActive]= useState(false) // для уведомления 
+    const [success, setSuccess]= useState(false) // для уведомления об успешном запросе
     const [filesSend, setFilesSend] = useState([])
     const [location, setLocation] = useState(null)
-    const [preLoader, setPreLoader] = useState(false)
-    const [isMagistral, setIsMagistral] = useState(false)
+    const [preLoader, setPreLoader] = useState(false) // для загрузки 
     const [objectsTypes, setObjectsTypes] = useState(null) 
-    const [isCorrectType, setIsCorrectType]= useState(true)
-    const [isCorrectStatus, setIsCorrectStatus]= useState(true)
+    const [isCorrectType, setIsCorrectType] = useState(false);
     const [objectsStatuses, setObjectsStatuses] = useState(null) 
     const [project_draft_ru, setProject_draft_ru] = useState(null)
     const [project_draft_kk, setProject_draft_kk] = useState(null)
     const [project_draft_en, setProject_draft_en] = useState(null)
-    const [typeSelectActive, setTypeSelectActive] = useState(false)
-    const [isCorrectLocation, setIsCorrectLocation]= useState(true)
-    const [statusSelectActive, setStatusSelectActive] = useState(false)
     const { register, handleSubmit, setValue, getValues, formState: { errors } } = useForm();
 
     useEffect(()=>{
@@ -55,15 +47,12 @@ const CreateObject = () => {
                         for( let i=0; i< data.content[key].length;i++){
                             data.content[key][i] && setValue(`video[${i}]`, data.content[key][i]);
                         }
-                    }else{
+                    }
+                    else{
                         data.content[key] && setValue(key, data.content[key]);
                     }
                 }
-                setType(data.content.type);
-                setStatus(data.content.status)
-                data.content.isMagistral && setIsMagistral(data.content.isMagistral === 1 ? true : false)
                 data.content.photos && setImages(data.content.photos)
-                data.content.length && setLength(data.content.length)
                 data.content.location && setLocation(data.content.location)
                 data.content.project_draft_ru && setProject_draft_ru(data.content.project_draft_ru[0]);
                 data.content.project_draft_kk && setProject_draft_kk(data.content.project_draft_kk[0]);
@@ -73,7 +62,7 @@ const CreateObject = () => {
         }
     }, [id])
         
-    const darftPhotoSend = async (formData, item, itemName)=>{
+    const draftPhotoSend = async (formData, item, itemName)=>{
         if(item.url){
             formData.append(`${itemName}[0][url]`, item.url)
         }else{
@@ -87,10 +76,7 @@ const CreateObject = () => {
     }
 
     const onSubmit = async (data) => {
-        !location ? setIsCorrectLocation(false) : setIsCorrectLocation(true);
-        !type ? setIsCorrectType(false) :setIsCorrectType(true)
-        !status ? setIsCorrectStatus(false) : setIsCorrectStatus(true)
-        if(!location || !type || !status){
+        if(!location){
             return
         }
         setPreLoader(true);
@@ -100,16 +86,16 @@ const CreateObject = () => {
                     for(let i=0;i<data[key].length;i++){
                         formData.append(`video[${i}]`, data[key][i]);
                     }
-                }else{
+                }else if(key === "isMagistral" && isCorrectType){
+                    formData.append(key, data[key] ? 1 : 0)
+                }else if(key === "type" || key==="status"){
+                    formData.append(key, data[key].id)
+                }
+                else{
                     data[key] && formData.append(key, data[key]);
                 }
         }
-        formData.append('type', type.id);
-        formData.append('status', status.id);
-        if(type.id === 2 || type.id === 3){
-            length && formData.append("length", length);
-            formData.append("isMagistral", isMagistral ? 1 : 0);
-        }
+
         if(location){
             formData.append(`location[lat]`, location.lat);
             formData.append(`location[lng]`, location.lng);
@@ -132,17 +118,16 @@ const CreateObject = () => {
         }
             
         if(project_draft_ru){
-            let result = await darftPhotoSend(formData, project_draft_ru, "project_draft_ru");
+            let result = await draftPhotoSend(formData, project_draft_ru, "project_draft_ru");
         }
 
         if(project_draft_kk){
-            let result = await darftPhotoSend(formData, project_draft_kk, "project_draft_kk");  
+            let result = await draftPhotoSend(formData, project_draft_kk, "project_draft_kk");  
         }
 
         if(project_draft_en){
-            let result = await darftPhotoSend(formData, project_draft_en, "project_draft_en");
+            let result = await draftPhotoSend(formData, project_draft_en, "project_draft_en");
         }
-
         if(id){
                 try{
                     updateObject(id, formData).then(data => {console.log(data); setActive(true); setSuccess(true); setPreLoader(false)});
@@ -160,12 +145,6 @@ const CreateObject = () => {
                     setSuccess(false);
                 }
         }  
-    }
-
-    const selectClick = (e, setSelectActive, selectActive)=>{
-        setSelectActive(!selectActive);e.stopPropagation();
-        document.body.addEventListener('click', function(){setSelectActive(false)});
-        document.body.removeEventListener('click', function(){setSelectActive(false)});         
     }
 
     function dragStartHandler(e){ e.preventDefault(); }
@@ -193,7 +172,6 @@ const CreateObject = () => {
         }
     }
 
-
     return (
         <div className="create__object__page">
             <Helmet>
@@ -219,46 +197,32 @@ const CreateObject = () => {
                     <input className="input"  type="text" {...register("name_en")}/>
 
                     <div className="object__page-selections">
-                        <div className="page__select-parent">
+                        <div className={errors?.type ? "select-padding" : "page__select-parent"}>
                             <div className="label">Тип объекта *</div>
-                            <div className={isCorrectType ? "object__page-select" : "object__page-select select-error"} onClick={e=>selectClick(e, setTypeSelectActive, typeSelectActive)}>
-                                <p className="select__value">{type.name}</p>
-                                {type ? <span className="select-cross" onClick={()=>{setType('')}}>&#10006;</span>: ""}
-                                <span className="select-line"></span>
-                                <div className={typeSelectActive ? "select-icon select-icon-active": "select-icon"}></div>
-                            </div>
-                            {objectsTypes ? <MySelect active={typeSelectActive} setActive={setTypeSelectActive} options={objectsTypes} 
-                            setSelectedItem={setType}></MySelect> : <></>}
-                            {isCorrectType ? <></> : <div className="label error-label">Поле "Тип" обязательно для заполнения</div>}
+                            <NewSelect options={objectsTypes} register={register} setValue={setValue} item="type" getValues={getValues} setIsCorrectType={setIsCorrectType}></NewSelect>
+                            {errors?.type && <div className="label error-label select__label-error">Поле "Тип" обязательно для заполнения</div>}
                         </div>
 
-                        <div className="page__select-parent">
+                        <div className={errors?.status ? "select-padding" : "page__select-parent"}>
                             <div className="label">Статус объекта *</div>
-                            <div className={isCorrectStatus ? "object__page-select" : "object__page-select select-error"}  onClick={e=>selectClick(e, setStatusSelectActive, statusSelectActive)}>
-                                <p className="select__value">{status.name}</p>
-                                {status ? <span className="select-cross" onClick={()=>{setStatus('')}}>&#10006;</span>: ""}
-                                <span className="select-line"></span>
-                                <div className={statusSelectActive ? "select-icon select-icon-active": "select-icon"}></div>
-                            </div>
-                            {objectsStatuses ? <MySelect active={statusSelectActive} setActive={setStatusSelectActive} options={objectsStatuses} 
-                            setSelectedItem={setStatus}></MySelect> : <></>}
-                            {isCorrectStatus ? <></> : <div className="label error-label">Поле "Статус" обязательно для заполнения</div>}
+                            <NewSelect options={objectsStatuses} register={register} setValue={setValue} item="status" getValues={getValues} setIsCorrectType={setIsCorrectType}/>
+                            {errors?.status && <div className="label error-label select__label-error">Поле "Статус" обязательно для заполнения</div>}
                         </div>
                     </div>
 
-                    {type.id === 2 || type.id === 3 ? <> <input type="checkbox" checked={isMagistral} onChange={()=>setIsMagistral(!isMagistral)} className="custom-checkbox" id="happy"/>
-                    <label htmlFor="happy">Магистральный</label></> :<></>}
+                    <input type="checkbox" {...register("isMagistral")}  
+                    className={isCorrectType ? "custom-checkbox" : "unvisible" } id="happy"/>
+                    <label htmlFor="happy" className={isCorrectType ? "" : " unvisible"}>Магистральный</label>
 
                     <div className="label">Местоположение *</div>
                     <MapComponent location={location} setLocation={setLocation} fullScreenButton={false}/>
-                    {isCorrectLocation ? <></> : <div className="label error-label">Вы не выбрали Местоположение</div>}
+                    {location ? <></> : <div className="label error-label">Вы не выбрали Местоположение</div>}
             
-                    <div className="label">{type.id === 3 || type.id === 4 ? "Водоотдача" : "Объем" } (м<sup><small>3</small></sup>) *</div>
+                    <div className="label">{isCorrectType ? "Водоотдача" : "Объем" } (м<sup><small>3</small></sup>) *</div>
                     <input className="input" type="text" {...register("volume")}></input>
 
-                    {type.id === 2 || type.id === 3 ? <>
-                        <div className="label">Протяженность (км)</div>
-                        <input type="text" value={length} onChange={(e)=>setLength(e.target.value)} className="input"/> </>: <></>}
+                    <div className={isCorrectType ? "label" : "label unvisible"}>Протяженность (км)</div>
+                    <input type="text" {...register("length")} className={isCorrectType ? "input" : "input unvisible"} />
 
                     <div className="label">Фотографии *</div>
                     <div className="img__upload"

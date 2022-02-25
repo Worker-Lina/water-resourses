@@ -26,9 +26,11 @@ const Modal = ({id, active, setActive, mapRef, center, zoom}) => {
         slides = item.video :
       slides = null
     }
-    slides = slides.filter((el) =>{
-      return (el != null && el != "")
-    })
+    if(slides){
+      slides = slides.filter((el) =>{
+        return (el != null && el != "")
+      })
+    }
     return slides
   }
 
