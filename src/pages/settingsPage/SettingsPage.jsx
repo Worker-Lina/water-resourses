@@ -1,13 +1,12 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import { Link, useNavigate} from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 import { useEffect, useState } from 'react/cjs/react.development'
 import PreLoader from '../../components/loading/PreLoader'
 import MyButton from '../../components/myButton/MyButton'
 import ResponseRequets from '../../components/responseRequest/ResponseRequets'
-import { check, updatePassword, updateProfile, updateUser } from '../../http/userApi'
+import { check, updatePassword, updateProfile } from '../../http/userApi'
 import { Label, LabelError, Line, Page, PageForm, PageHeader, PageSubtitle } from '../../utils/styles'
-import { emailValidation, passwordValidate, nameValidate } from '../../utils/validate'
 import "./settingsPage.css"
 import { useForm } from "react-hook-form";
 
