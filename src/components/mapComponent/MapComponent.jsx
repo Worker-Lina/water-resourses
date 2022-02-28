@@ -71,10 +71,10 @@ const MapComponent = ({textVisible, setTextVisible, props, location, setLocation
     setTextVisible(!textVisible)
     let height = window.screen.width <= 640 ? window.innerHeight - 50 : window.innerHeight - 80
     if(textVisible){
-      document.getElementsByClassName('myMap')[0].style.height = height + "px";
+      document.getElementsByClassName('my-map')[0].style.height = height + "px";
       document.getElementById('footer').classList.add('footer-hidden');
     }else{
-      document.getElementsByClassName('myMap')[0].classList.remove('myMap-full');
+      document.getElementsByClassName('my-map')[0].classList.remove('my-map-full');
       document.getElementById('footer').classList.remove('footer-hidden');
     }
   }
@@ -94,7 +94,7 @@ const MapComponent = ({textVisible, setTextVisible, props, location, setLocation
 
   return(<div className="map__container">
      <MapContainer whenCreated={ mapInstance => { 
-       mapRef.current = mapInstance; addPolylinesToMap();} } className="myMap" center={center} zoom={zoom} scrollWheelZoom={false} zoomControl={false} doubleClickZoom={false} maxBounds={maxBounds}>
+       mapRef.current = mapInstance; addPolylinesToMap();} } className="my-map" center={center} zoom={zoom} scrollWheelZoom={false} zoomControl={false} doubleClickZoom={false} maxBounds={maxBounds}>
       <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://api.maptiler.com/tiles/satellite-v2/{z}/{x}/{y}.jpg?key=Orq9UsgNWFD0JZUL2f7X" minZoom={8}
       />
