@@ -1,12 +1,12 @@
-.userCreatePage{
+.user-create-page{
     padding: 110px 10% 30px;
     background-color:#eeeeee;
     min-height: calc(100vh - 70px);
 }
-.userCreatePage .page__subtitle{
+.user-create-page .page__subtitle{
     margin-left: 10px;
 }
-.userCreatePage__newPassword{
+.user__new-password{
     background-color: #c5fddf;
     color: #20782e;
     padding: 10px 25px;
