@@ -30,15 +30,15 @@
     bottom: 20px;
     left: 20px;
 }
-.mainPage a{
+.main-page a{
     color: #ffff;
 }
 
 @media (max-width:640px){
-    .mainPage{
+    .main-page{
         padding-top: 50px;
     }
-    .mainPage .title{
+    .main-page .title{
         margin-bottom: 20px;
     }
     .title{
@@ -54,7 +54,7 @@
     .main__text{
         padding: 30px 6% ;
     }
-    .mainPage-btn{
+    .main-page-btn{
         bottom: 10px;
         left: 10px;
     }
