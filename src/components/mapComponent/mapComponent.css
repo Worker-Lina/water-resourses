@@ -1,14 +1,14 @@
 .map__container{
     position: relative;
 }
-.my-map{
+.myMap{
     width: 100%;
     height: 100vh;
 }
-.my-map-full{
+.myMap-full{
     height: 100vh !important;
 }
-.my-map{
+.myMap__content{
     width: 200px;
     background-color: brown;
     height: 300px;
@@ -94,7 +94,7 @@
         width: 24px !important;
         height: 70px !important;
     }
-    .my-map{
+    .myMap{
         height: 70vh;
     }
 }
