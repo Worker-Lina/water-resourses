@@ -38,7 +38,7 @@ const ObjectsPage = () => {
         {responseActive ? <ResponseRequets active={responseActive} setActive={setResponseActive} success={success}/> : <></>}
         <div className="page__item">
             <div className="page__subtitle">Объекты</div>
-            <Link to={CREATE_OBJECT_ROUTE}> <MyButton variant="green"> <span className="users__page__icon">+</span> Добавить</MyButton> </Link>
+            <Link to={CREATE_OBJECT_ROUTE}> <MyButton variant="green"> <span className="users__page-icon">+</span> Добавить</MyButton> </Link>
         </div>
         <div className="page__content">
             <div className="page__content-item">
