@@ -3,7 +3,7 @@
     background: #eeeeee;
     padding: 110px 10% 30px;
 }
-.create__object__page .page__subtitle{
+.create__object-page .page__subtitle{
     margin-left: 10px;
 }
 .object__page-selections{
@@ -153,7 +153,7 @@
     grid-column: 1/4;
 }
 
-.create__object__page .myMap{
+.create__object-page .myMap{
     height: 70vh;
 }
 .draft__photo{
