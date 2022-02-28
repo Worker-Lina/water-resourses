@@ -12,15 +12,12 @@ export const Page = styled.div`
     padding: 110px 10% 30px;
     min-height: calc(100vh - 70px);
 
-    .input{
-        margin-bottom: 10px;
-    }
     .page__subtitle{
         margin-left: 10px;
     }
 `
 
-export const PageForm = styled.div`
+export const PageForm = styled.form`
     background-color: #ffff;
     margin-bottom: 20px;
     border-radius: 4px;
@@ -51,4 +48,15 @@ export const Label = styled.div`
 export const LabelError = styled(Label)`
     color: red;
     margin-bottom: 10px;
+`
+
+export const Input = styled.input`
+    outline: none;
+    padding: 10px 25px;
+    border-radius: 4px;
+    border: none;
+    background: #f3f4f6;
+    margin-bottom: 20px;
+    width: 100%;
+    font-size: 14px;
 `
