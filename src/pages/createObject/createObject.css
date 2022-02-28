@@ -3,6 +3,10 @@
     background: #eeeeee;
     padding: 110px 10% 30px;
 }
+
+.create__object-page .login-form__content{
+    padding-bottom: 10px;
+}
 .create__object-page .page__subtitle{
     margin-left: 10px;
 }
