@@ -173,7 +173,7 @@ const CreateObject = () => {
     }
 
     return (
-        <div className="create__object__page">
+        <div className="create__object-page">
             <Helmet>
                 <title>{id ? "Редактирование" : "Создание"} объекта</title>
             </Helmet>
