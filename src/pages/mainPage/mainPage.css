@@ -1,4 +1,4 @@
-.mainPage{
+.main-page{
     position: relative;
     padding-top: 80px;
 }
@@ -25,7 +25,7 @@
     position: inherit;
     visibility: inherit;
 }
-.mainPage-btn{
+.main-page__btn{
     position: absolute;
     bottom: 20px;
     left: 20px;
