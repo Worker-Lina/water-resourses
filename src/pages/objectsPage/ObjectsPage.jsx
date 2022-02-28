@@ -41,11 +41,11 @@ const ObjectsPage = () => {
             <Link to={CREATE_OBJECT_ROUTE}> <MyButton variant="green"> <span className="users__page__icon">+</span> Добавить</MyButton> </Link>
         </div>
         <div className="page__content">
-            <div className="page__content__item">
-                <p className="content__item__text">ID</p>
-                <p className="content__item__text">Название</p>
-                <p className="content__item__text">Статус</p>
-                <p className="content__item__text text-actions">Действия</p>
+            <div className="page__content-item">
+                <p className="content__item-text">ID</p>
+                <p className="content__item-text">Название</p>
+                <p className="content__item-text">Статус</p>
+                <p className="content__item-text text-actions">Действия</p>
             </div>
             <div className="line"></div>
             {objects.length ? objects.map(object =>

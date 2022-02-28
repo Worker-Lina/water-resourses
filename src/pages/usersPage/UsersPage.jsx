@@ -34,14 +34,14 @@ const UsersPage = () => {
         {responseActive ? <ResponseRequets active={responseActive} setActive={setResponseActive} success={success}/> : <></>}
         <div className="page__item">
             <div className="page__subtitle">Пользователи</div>
-            <Link to={USER_CREATE_ROUTE}> <MyButton variant="green"> <span className="users__page__icon">+</span> Добавить</MyButton> </Link>
+            <Link to={USER_CREATE_ROUTE}> <MyButton variant="green"> <span className="users__page-icon">+</span> Добавить</MyButton> </Link>
         </div>
         <div className="page__content">
-            <div className="page__content__item user-item-page">
-                <p className="content__item__text">ID</p>
-                <p className="content__item__text">Название</p>
-                <p className="content__item__text">E-mail</p>
-                <p className="content__item__text text-actions">Действия</p>
+            <div className="page__content-item user-item-page">
+                <p className="content__item-text">ID</p>
+                <p className="content__item-text">Название</p>
+                <p className="content__item-text">E-mail</p>
+                <p className="content__item-text text-actions">Действия</p>
             </div>
             <div className="line"></div>
             {users.length ? users.map(user =>

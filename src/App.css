@@ -127,7 +127,7 @@ body{
     border-radius: 4px;
     padding: 20px 10px;
 }
-.page__content__item{
+.page__content-item{
     display: grid;
     grid-template-columns: 5% 1fr 1fr 15%;
     align-items: center;
@@ -135,7 +135,7 @@ body{
 .user-item-page{
   grid-template-columns: 5% 1fr 1fr 10%;
 }
-.content__item__text{
+.content__item-text{
     font-size: 16px;
     font-weight: 600;
 }
